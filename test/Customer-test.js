@@ -9,7 +9,6 @@ describe('Customer', () => {
 
   beforeEach(() => {
     customer1 = new Customer(customersData.customers[0]);
-    // customer1 = customersData.customers[0];
     customer2 = new Customer(customersData.customers[1]);
     customer3 = new Customer(customersData.customers[2]);
     rooms = roomsData.rooms;
@@ -39,20 +38,19 @@ describe('Customer', () => {
 
   it('should have a function to hold a customers bookings', () => {
     customer1.loadExistingBookings(bookings)
-    expect(customer1.bookings).to.deep.equal([bookings[6],bookings[7]]);
+    expect(customer1.bookings).to.deep.equal([bookings[3]])
   });
 
   it('should have a function to add the cost per night of bookings to the class', () => {
     customer1.loadExistingBookings(bookings)
     customer1.addCostPerNight(rooms)
     expect(customer1.bookings[0].amount).to.equal(429.44);
-    expect(customer1.bookings[1].amount).to.equal(200.39);
   });
 
   it('should have a function to calculate the total cost of money spent at the Hotel', () => {
-    customer1.loadExistingBookings(bookings)
-    customer1.addCostPerNight(rooms)
-    expect(customer1.calculateSpend()).to.equal(629.83);
+    customer2.loadExistingBookings(bookings)
+    customer2.addCostPerNight(rooms)
+    expect(customer2.calculateSpend()).to.equal(982.28);
   });
 
 });
