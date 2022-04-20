@@ -11,18 +11,5 @@ motivation and context. Were there any issues that arose? Is there anything you 
 - [ ] Refactor feature (non-breaking change that modifies existing work)
 - [ ] Cosmetic changes (changes to layout or visuals in CSS file)
 
-
-# How Has This Been Tested?
-
-- [ ] console.log()
-- [ ] dev tools
-- [ ] functionality check through web browser
-
-
-
-# Checklist:
-
-- [ ] My code follows the style guidelines of this project (semicolons, indentation, naming conventions, etc..)
-- [ ] I have performed a self-review of our code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have deleted all comments/console.log() after functionality and understanding is final
+# Project board:
+- Does this close any items on the Project Board?
