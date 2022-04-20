@@ -41,4 +41,8 @@ describe('Rooms', () => {
     expect(roomsClass.roomSearchFilter(date,bookings,'single room','king')).to.deep.equal([rooms[2]]);
   });
 
+  it('shouldn\'t filter available rooms if roomType or bedSize are not specified', () => {
+    expect(roomsClass.roomSearchFilter(date,bookings)).to.deep.equal([rooms[0],rooms[1],rooms[2],rooms[4]]);
+  });
+
 });
