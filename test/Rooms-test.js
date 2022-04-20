@@ -25,4 +25,12 @@ describe('Rooms', () => {
     expect(roomsClass).to.be.an.instanceOf(Rooms);
   });
 
+  it.skip('should filter available rooms by date', () => {
+    expect(roomsClass.dateFilter()).to.deep.equal([]);
+  });
+
+  it.skip('should further filter available rooms by roomtype', () => {
+    expect(roomsClass.roomTypeFilter()).to.deep.equal([]);
+  });
+
 });
