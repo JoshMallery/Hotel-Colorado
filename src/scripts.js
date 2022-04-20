@@ -11,6 +11,7 @@ import domUpdates from './domUpdates.js'
 import Customer from './classes/Customer.js'
 import Manager from './classes/Manager.js'
 
+//globalVariables
 let bookingsData,roomsData,customersData
 
 console.log('This is the JavaScript entry file - your code begins here.');

@@ -16,7 +16,7 @@ describe('Manager', () => {
     expect(Manager).to.be.a('function');
   });
 
-  it('should be an instance of Recipe', () => {
+  it('should be an instance of Manager', () => {
     expect(manager).to.be.an.instanceOf(Manager);
   });
 
