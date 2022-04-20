@@ -67,11 +67,31 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .room-card {
+  flex-direction: column;
+  display: Flex;
   height: 50%;
   width:20%
+}
+
+.room-details {
+  height:90%;
+  width:100%;
+}
+
+.room-image {
+  height:90%;
+  width:98%;
+}
+
+.room-card-buttons {
+  display:flex;
+  justify-content: space-around;
+  height:10%;
+  width: 100%;
 }
 
 .manager-container {
