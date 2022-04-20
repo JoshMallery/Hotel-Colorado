@@ -5,21 +5,19 @@ import roomsData from './sampleData/rooms-sample.js';
 import Customer from '../src/classes/Customer.js';
 
 describe('Customer', () => {
-  let bookings, customer1, customer2, rooms, customerClass;
+  let bookings, customer1, customer2, customer3, rooms, customerClass;
 
   beforeEach(() => {
     customerClass = new Customer();
     customer1 = customersData.customers[0];
-    customer2 = customersData.customers[1]
+    customer2 = customersData.customers[1];
+    customer3 = customersData.customers[2];
     rooms = roomsData.rooms;
     bookings = bookingsData.bookings;
   })
 
   it('should be a function', () => {
     expect(Customer).to.be.a('function');
-    console.log(customer1)
-    console.log(customer2)
-    console.log(bookings)
   });
 
   it('should be an instance of Customer', () => {
