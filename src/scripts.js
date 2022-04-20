@@ -11,9 +11,19 @@ import domUpdates from './domUpdates.js'
 import Customer from './classes/Customer.js'
 import Manager from './classes/Manager.js'
 
+let bookingsData,roomsData,customersData
 
 console.log('This is the JavaScript entry file - your code begins here.');
 domUpdates.loadPage('blah blah')
 
-Promise.all(apiCalls.fetchAllApiData()).then(data => console.log(data));
-console.log(apiCalls.fetchAllApiData())
+Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data)).then(data => console.log(data));
+console.log(apiCalls.fetchAllApiData());
+
+const setGlobalVariables = (fetchedData) => {
+  customersData = fetchedData[0];
+  roomsData = fetchedData[1];
+  bookingsData = fetchedData[2];
+
+  console.log(customersData)
+
+}
