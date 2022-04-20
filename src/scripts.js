@@ -10,6 +10,7 @@ import apiCalls from './apiCalls.js'
 import domUpdates from './domUpdates.js'
 import Customer from './classes/Customer.js'
 import Manager from './classes/Manager.js'
+import Rooms from './classes/Rooms.js'
 
 //globalVariables
 let bookingsData,roomsData,customersData
