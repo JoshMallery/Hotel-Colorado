@@ -15,8 +15,6 @@ describe('Customer', () => {
     rooms = roomsData.rooms;
     bookings = bookingsData.bookings;
 
-    customer1.loadExistingBookings()
-    customer1.addCostPerNight()
   })
 
   it('should be a function', () => {
@@ -24,33 +22,37 @@ describe('Customer', () => {
   });
 
   it('should be an instance of Customer', () => {
-    expect(customerClass).to.be.an.instanceOf(Customer);
+    expect(customer1).to.be.an.instanceOf(Customer);
   });
 
   it('should hold a customers id', () => {
-    expect(customerClass.id).to.equal(customer1.id);
+    expect(customer1.id).to.equal(customersData.customers[0].id);
   });
 
   it('should hold a customers name', () => {
-    expect(customerClass.name).to.equal(customer1.name);
+    expect(customer1.name).to.equal(customersData.customers[0].name);
   });
 
   it('should have a place to hold a customers bookings', () => {
-    expect(customerClass.bookings).to.deep.equal([]);
+    expect(customer1.bookings).to.deep.equal([]);
   });
 
   it('should have a function to hold a customers bookings', () => {
-    expect(customerClass.loadExistingBookings(bookings)).to.deep.equal([]);
+    customer1.loadExistingBookings(bookings)
+    expect(customer1.bookings).to.deep.equal([bookings[6],bookings[7]]);
   });
 
   it('should have a function to add the cost per night of bookings to the class', () => {
-    customerClass.addCostPerNight(rooms)
-    expect(customerClass.addCostPerNight(rooms)).to.equal("$100");
+    customer1.loadExistingBookings(bookings)
+    customer1.addCostPerNight(rooms)
+    expect(customer1.bookings[0].amount).to.equal(429.44);
+    expect(customer1.bookings[1].amount).to.equal(200.39);
   });
 
   it('should have a function to calculate the total cost of money spent at the Hotel', () => {
-
-    expect(customerClass.calculateSpend()).to.equal("$100");
+    customer1.loadExistingBookings(bookings)
+    customer1.addCostPerNight(rooms)
+    expect(customer1.calculateSpend()).to.equal(629.83);
   });
 
 });

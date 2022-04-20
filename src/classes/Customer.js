@@ -6,7 +6,7 @@ class Customer {
   }
 
   loadExistingBookings(allBookings) {
-    this.bookings = allBookings.filter(booking => booking.id === this.id)
+    this.bookings = allBookings.filter(booking => booking.userID === this.id)
   };
 
   addCostPerNight(roomData) {
@@ -20,13 +20,11 @@ class Customer {
   };
 
   calculateSpend() {
-    return this.bookings.reduce((acc,booking)=>{
+    return Number(this.bookings.reduce((acc,booking)=>{
         acc += booking.amount
       return acc
-    },0)
-  }
-
-
+    },0).toFixed(2))
+  };
 
 }
 
