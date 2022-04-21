@@ -16,7 +16,7 @@ import Rooms from './classes/Rooms.js'
 //buttons, login etc.
 
 const searchRoomButton = document.querySelector('.nav-search');
-// const something = document.querySelector('');
+const goToBookingsButton = document.querySelector('.nav-displays')// const something = document.querySelector('');
 //const something = document.querySelector('');
 //const something = document.querySelector('');
 //const something = document.querySelector('');
@@ -41,7 +41,7 @@ const setGlobalVariables = (fetchedData) => {
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
-  console.log(customersData)
+  console.log("line 44 customers data",customersData)
 }
 
 const populateCustomer = (bookings,roomsInfo) => {
@@ -79,8 +79,10 @@ const transformFormDate = (date) => {
 //event listeners
 
 searchRoomButton.addEventListener("click",(event) => {
-  console.log(event.target.parentNode.children)
 const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
 searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value)
+});
 
+goToBookingsButton.addEventListener("click",() => {
+  domUpdates.displayBookings(customer.bookings)
 })
