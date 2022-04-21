@@ -45,6 +45,11 @@ const refreshBookings = () => {
 }
 
 const searchRooms = (date,bookingInfo,type,bed) => {
-  let results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
+  const results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
   domUpdates.displaySearchResults(results)
+}
+
+const addBooking = (bookDate,roomNum) {
+  apiCalls.postBooking(customer.id,bookDate,roomNum); // is this the best way to get the customer id?
+  refreshBookings();
 }

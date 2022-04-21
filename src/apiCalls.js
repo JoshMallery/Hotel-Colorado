@@ -11,9 +11,9 @@ fetchAllApiData() {
     return[this.fetchOne("customers"),this.fetchOne("rooms"), this.fetchOne("bookings")];
   },
 
-  // postBooking(bookingInfo) {
-  //   fetch()
-  // },
+  postBooking(bookingInfo) {
+    fetch()
+  },
   //
   // removeBooking(bookingInfo) {
   //   fetch()
