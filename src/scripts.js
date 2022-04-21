@@ -36,10 +36,15 @@ const setGlobalVariables = (fetchedData) => {
 const populateCustomer = (bookings,roomsInfo) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
-  customerSpend = customer.calculateSpend();
+  customerSpend = customer.calculateSpend(); //maybe not needed
   domUpdates.loadCustomer(customer);
 }
 
 const refreshBookings = () => {
   Promise.all(apiCalls.fetchOne('bookings')).then(data => populateCustomer(data,roomsData)).then(data => console.log("updated fetched info",data));
+}
+
+const searchRooms = (date,bookingInfo,type,bed) => {
+  let results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
+  domUpdates.displaySearchResults(results)
 }
