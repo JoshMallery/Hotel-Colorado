@@ -17,13 +17,6 @@ class Rooms{
   };
 
   roomSearchFilter(date,bookingInfo,type,bed,customerID) {
-      if(bed === 'null'){
-        bed = null
-      }
-
-      if(type === 'null'){
-        type = null
-      }
     return this.dateFilter(date,bookingInfo,customerID)
       .filter(room => (room.roomType === (type || room.roomType)) && ((room.bedSize === (bed || room.bedSize)) ));
   };
