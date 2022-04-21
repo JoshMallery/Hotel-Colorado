@@ -13,7 +13,7 @@ import Manager from './classes/Manager.js'
 import Rooms from './classes/Rooms.js'
 
 //globalVariables
-let bookingsData,roomsData,customersData
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend
 
 console.log('This is the JavaScript entry file - your code begins here.');
 domUpdates.loadPage('blah blah')
@@ -26,6 +26,30 @@ const setGlobalVariables = (fetchedData) => {
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
 
-  console.log(customersData)
+  customer = new Customer(customersData[0]); //hardcoded for now as 1 customer
+  rooms = new Rooms(roomsData);
 
+  populateCustomer(bookingsData,roomsData);
+  console.log(customersData)
+}
+
+const populateCustomer = (bookings,roomsInfo) => {
+  customer.loadExistingBookings(bookings);
+  customer.addCostPerNight(roomsInfo);
+  customerSpend = customer.calculateSpend(); //maybe not needed
+  domUpdates.loadCustomer(customer);
+}
+
+const refreshBookings = () => {
+  Promise.all(apiCalls.fetchOne('bookings')).then(data => populateCustomer(data,roomsData)).then(data => console.log("updated fetched info",data));
+}
+
+const searchRooms = (date,bookingInfo,type,bed) => {
+  const results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
+  domUpdates.displaySearchResults(results)
+}
+
+const addBooking = (bookDate,roomNum) {
+  Promise.all(apiCalls.postBooking(customer.id,bookDate,roomNum)); // is this the best way to get the customer id?
+  refreshBookings();
 }
