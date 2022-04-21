@@ -1,33 +1,34 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 import apiCalls from './apiCalls.js'
 import domUpdates from './domUpdates.js'
 import Customer from './classes/Customer.js'
 import Manager from './classes/Manager.js'
 import Rooms from './classes/Rooms.js'
-// query Selectors
+// DataModel query Selectors
 //anything that will be an event listener!
 //buttons, login etc.
-
 const searchRoomButton = document.querySelector('.nav-search');
-const goToBookingsButton = document.querySelector('.nav-displays')// const something = document.querySelector('');
+const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
+//const logonButton = document.querySelector(''); listen to the class of the parent!!
+//const bookButton = document.querySelector('#bookRoom');
+
+
+//domQuerySelectors
+const textPrompts = document.querySelector('.text-prompts');
+const custSpend = document.querySelector('.customer-spend');
+const roomsDisplay = document.querySelector('.room-viewing-container');
 //const something = document.querySelector('');
 //const something = document.querySelector('');
-//const something = document.querySelector('');
-//const something = document.querySelector('');
-//const something = document.querySelector('');
+
+
 
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend
 
 console.log('This is the JavaScript entry file - your code begins here.');
 domUpdates.loadPage('blah blah')
+
 
 Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data)).then(data => console.log(data));
 console.log(apiCalls.fetchAllApiData());
@@ -48,7 +49,7 @@ const populateCustomer = (bookings,roomsInfo) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
-  domUpdates.loadCustomer(customer);
+  domUpdates.loadCustomer(customer,roomsDisplay,textPrompts,custSpend);
 }
 
 const refreshBookings = () => {
@@ -76,7 +77,7 @@ const transformFormDate = (date) => {
   return result.join("")
 }
 
-//event listeners
+//event listeners//
 
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
