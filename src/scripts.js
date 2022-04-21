@@ -50,6 +50,6 @@ const searchRooms = (date,bookingInfo,type,bed) => {
 }
 
 const addBooking = (bookDate,roomNum) {
-  apiCalls.postBooking(customer.id,bookDate,roomNum); // is this the best way to get the customer id?
+  Promise.all(apiCalls.postBooking(customer.id,bookDate,roomNum)); // is this the best way to get the customer id?
   refreshBookings();
 }
