@@ -55,8 +55,8 @@ const refreshBookings = () => {
   Promise.all(apiCalls.fetchOne('bookings')).then(data => populateCustomer(data,roomsData)).then(data => console.log("updated fetched info",data));
 }
 
-const searchRooms = (date,bookingInfo,type,bed) => {
-  const results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
+const searchRooms = (date,bookingInfo,type,bed,customerID) => {
+  const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
   domUpdates.displaySearchResults(results);
 }
 
@@ -79,8 +79,11 @@ const transformFormDate = (date) => {
 //event listeners
 
 searchRoomButton.addEventListener("click",(event) => {
-const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
-searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value)
+  if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
+    event.preventDefault()
+  const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
+  searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
+};
 });
 
 goToBookingsButton.addEventListener("click",() => {
