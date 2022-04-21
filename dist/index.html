@@ -9,30 +9,31 @@
 <body>
   <header>Hotel - Colorado Banner Image</header>
   <main>
-    <nav>
-      <button class="nav-displays">Your Bookings</button>
-      <br>
-      <label for ="calendarDate"> Search For Availability by Date:</label>
-      <input class="nav-interactions" type="date"id="calendarDate">
-        <br>
-      <label for="roomType">Choose a Room Type for Your Stay:</label>
-      <select class="nav-displays" name="roomType" id="roomType">
-        <option value="null">Please Pick a Room Type</option>
-        <option value ="single room">Single Room</option>
-        <option value ="junior suite">Junior Suite</option>
-        <option value ="suite">Suite</option>
-        <option value ="residential suite">Residential Suite</option>
-      </select>
-      <br>
-      <label for="bedSize">Choose a Bedsize for Your Stay:</label>
-      <select class="nav-displays" name="bedSize" id="bedSize">
-        <option value="null">Please Pick a Bed Size</option>
-        <option value ="twin">Twin</option>
-        <option value ="full">Full</option>
-        <option value ="queen">Queen</option>
-        <option value ="king">King</option>
-      </select>
-      <br>
+    <nav class ="nav-container">
+      <button class="nav-displays" id="yourBookings">Your Bookings</button>
+      <form class="nav-search" onsubmit="return false">
+        <label for ="calendarDate"> Search For Availability by Date:</label>
+        <input class="nav-interactions" type="date"id="calendarDate" required>
+
+        <label for="roomType">Choose a Room Type for Your Stay:</label>
+        <select class="nav-displays" name="roomType" id="roomType">
+          <option value="null">Please Pick a Room Type</option>
+          <option value ="single room">Single Room</option>
+          <option value ="junior suite">Junior Suite</option>
+          <option value ="suite">Suite</option>
+          <option value ="residential suite">Residential Suite</option>
+        </select>
+
+        <label for="bedSize">Choose a Bedsize for Your Stay:</label>
+        <select class="nav-displays" name="bedSize" id="bedSize">
+          <option value="null">Please Pick a Bed Size</option>
+          <option value ="twin">Twin</option>
+          <option value ="full">Full</option>
+          <option value ="queen">Queen</option>
+          <option value ="king">King</option>
+        </select>
+        <input id="availabilitySearch" type ="submit" value="Search For available Rooms">
+      </form>
       <section class ="customer-spend nav-displays">Hotel Colorado Spend: $600</section>
     </nav>
     <section class="content-container">

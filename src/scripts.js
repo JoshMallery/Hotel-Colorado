@@ -11,6 +11,17 @@ import domUpdates from './domUpdates.js'
 import Customer from './classes/Customer.js'
 import Manager from './classes/Manager.js'
 import Rooms from './classes/Rooms.js'
+// query Selectors
+//anything that will be an event listener!
+//buttons, login etc.
+
+const searchRoomButton = document.querySelector('.nav-search');
+// const something = document.querySelector('');
+//const something = document.querySelector('');
+//const something = document.querySelector('');
+//const something = document.querySelector('');
+//const something = document.querySelector('');
+//const something = document.querySelector('');
 
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend
@@ -46,10 +57,30 @@ const refreshBookings = () => {
 
 const searchRooms = (date,bookingInfo,type,bed) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed);
-  domUpdates.displaySearchResults(results)
+  domUpdates.displaySearchResults(results);
 }
 
-const addBooking = (bookDate,roomNum) {
+const addBooking = (bookDate,roomNum) => {
   Promise.all(apiCalls.postBooking(customer.id,bookDate,roomNum)); // is this the best way to get the customer id?
   refreshBookings();
 }
+
+const transformFormDate = (date) => {
+  const result = date.split("").map(num => {
+    if(num === "-"){
+      return "/";
+    } else {
+      return num;
+    }
+  });
+  return result.join("")
+}
+
+//event listeners
+
+searchRoomButton.addEventListener("click",(event) => {
+  console.log(event.target.parentNode.children)
+const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
+searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value)
+
+})
