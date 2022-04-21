@@ -11,7 +11,7 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
 //const logonButton = document.querySelector(''); listen to the class of the parent!!
-//const bookButton = document.querySelector('#bookRoom');
+const bookButton = document.querySelector('#newBooking');
 
 
 //domQuerySelectors
@@ -26,7 +26,6 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend
 
-console.log('This is the JavaScript entry file - your code begins here.');
 domUpdates.loadPage('blah blah')
 
 
@@ -89,4 +88,8 @@ searchRoomButton.addEventListener("click",(event) => {
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay)
+})
+
+bookButton.addEventListener("click",(event) =>{
+  console.log(event.target)
 })
