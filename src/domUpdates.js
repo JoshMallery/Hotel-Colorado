@@ -32,10 +32,10 @@ refreshPage() {
 
 },
 
-displaySearchResults(results) {
+displaySearchResults(results,cardView) {
   console.log("results from a search!!", results)
-  //viewcards innerhtml = ""
-  //   viewcards,innerHTML = populateCards(results)
+  cardView.innerHTML = "";
+  cardView.innerHTML = this.populateCards(results);
   // if(viewcards innerhtml ===""){
   //   innerhtml = " SORRY no rooms available that date"
   // }

@@ -58,7 +58,7 @@ const refreshBookings = () => {
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
-  domUpdates.displaySearchResults(results);
+  domUpdates.displaySearchResults(results,roomsDisplay);
 }
 
 const addBooking = (bookDate,roomNum) => {
@@ -88,5 +88,5 @@ searchRoomButton.addEventListener("click",(event) => {
 });
 
 goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings)
+  domUpdates.displayBookings(customer.bookings,roomsDisplay)
 })
