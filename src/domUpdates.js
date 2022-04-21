@@ -1,6 +1,5 @@
 let domUpdates = {
 
-
 loadCustomer(customer){
   displayBookings(customer.bookings);
   showTotalSpend(customer.calculateSpend());
