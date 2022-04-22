@@ -44,7 +44,9 @@ populateSearchCards(displayData,roomPrompt) {
     cardData +=
     `<section class="room-card">
       <section class = "room-details">
-        Room 1 twin bed, suite
+        Night of Stay: ${item.bookingDate}<br>
+        Room Type: ${item.roomType} with ${item.bedSize} bed<br>
+        Nightly Rate: $${item.costPerNight}
         <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
       </section>
       <section class ="room-card-buttons">
@@ -61,14 +63,21 @@ populateSearchCards(displayData,roomPrompt) {
 populateBookingCards(displayData,roomPrompt) {
   // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
   let cardData= "";
-   displayData.map(item =>{
-    cardData +=
-    `<section class="room-card">
-      <section class ="room-details">
-        Room 1 twin bed, suite
-        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
-      </section>
-    </section>`
+
+  //add date of stay
+  //room of stay
+  //cost of trip
+  // displayData.sort((a,b) => b.date - a.date)
+  displayData
+    .reverse()
+    .map(item =>{
+      cardData +=
+      `<section class="room-card">
+        <section class ="room-details">
+          Date of Stay: ${item.date}<br> Room Number: ${item.roomNumber}<br> Cost of stay: $${item.amount}
+          <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.roomNumber}">
+        </section>
+      </section>`
 
     // <section class ="room-card-buttons">
     // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>

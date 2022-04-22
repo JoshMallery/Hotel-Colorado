@@ -82,7 +82,7 @@ nav {
   height: 80%;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content:space-around;
   align-items: center;
   flex-wrap:wrap;
   overflow-y: scroll;
@@ -93,8 +93,8 @@ nav {
   flex-direction: column;
   display: Flex;
   height: 50%;
-  width: 20%;
-  margin: 50px;
+  width: 25%;
+  margin: 20px;
   font-size: 17px;
 }
 
@@ -104,7 +104,7 @@ nav {
 }
 
 .room-image {
-  height:90%;
+  height:70%;
   width:98%;
 }
 
