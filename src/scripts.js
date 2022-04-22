@@ -8,6 +8,7 @@ import Rooms from './classes/Rooms.js'
 // DataModel query Selectors
 //anything that will be an event listener!
 //buttons, login etc.
+
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
 //const logonButton = document.querySelector(''); listen to the class of the parent!!
@@ -26,22 +27,15 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
 
-domUpdates.loadPage('blah blah')
-
-
-Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data)).then(data => console.log(data));
-console.log(apiCalls.fetchAllApiData());
-
 const setGlobalVariables = (fetchedData) => {
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
 
-  customer = new Customer(customersData[1]); //hardcoded for now as 1 customer
+  customer = new Customer(customersData[1]);
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
-  // console.log("line 44 customers data",customersData)
 }
 
 const populateCustomer = (bookings,roomsInfo) => {
@@ -51,18 +45,17 @@ const populateCustomer = (bookings,roomsInfo) => {
   domUpdates.loadCustomer(customer,roomsDisplay,textPrompts,custSpend);
 }
 
+const addBooking = (input) => {
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
+}
+
 const refreshBookings = () => {
-  Promise.all(apiCalls.fetchOne('bookings')).then(data => populateCustomer(data,roomsData)).then(data => console.log("updated fetched info",data));
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => populateCustomer(data[0],roomsData));
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
   domUpdates.displaySearchResults(results,roomsDisplay);
-}
-
-const addBooking = (bookDate,roomNum) => {
-  Promise.all(apiCalls.postBooking(customer.id,bookDate,roomNum)); // is this the best way to get the customer id?
-  refreshBookings();
 }
 
 const transformFormDate = (date) => {
@@ -77,25 +70,25 @@ const transformFormDate = (date) => {
 }
 
 //event listeners//
+window.addEventListener("load",() => {
+  //show the logon screen here!?!
+  // domUpdates.showLogon();
+  Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
+});
 
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
     event.preventDefault()
   const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
   searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
-  // bookButton = document.querySelector('#newBooking');
-  // console.log(bookButton)
-};
+  };
 });
 
-// bookButton.addEventListener("click",(event) =>{
-//   console.log(event.target)
-// })
-
 roomsDisplay.addEventListener("click", (event) => {
+  let input = event.target.dataset;
+
   if(event.target.id === "newBooking"){
-    Promise.all([apiCalls.postBooking(parseInt(event.target.dataset.user),event.target.dataset.date,parseInt(event.target.dataset.room)),apiCalls.fetchOne('bookings')])
-    .then(data => populateCustomer(data[1],roomsData))
+    addBooking(input);
   }
 });
 

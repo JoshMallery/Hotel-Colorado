@@ -20,11 +20,6 @@ displayTotalSpend(amount,spendPrompt) {
   spendPrompt.innerText = `Hotel Colorado Spend: $${amount}`
 },
 
-loadPage(info){
-  //this is maybe maybe redundant?
-  console.log('loaded page',info)
-},
-
 refreshPage() {
 
 },
