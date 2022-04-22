@@ -15,9 +15,13 @@ fetchOne(param) {
         .catch((error) => console.log(error));
     },
 
-fetchAllCustomerData(custID = "") {
+fetchOneCustomerData(custID = "") {
   console.log(custID)
     return[this.fetchCustomer(custID),this.fetchOne("rooms"), this.fetchOne("bookings")];
+  },
+
+fetchManagerData() {
+    return[this.fetchOne("customers"),this.fetchOne("rooms"), this.fetchOne("bookings")];
   },
 
 postBooking(id,date,roomNum) {

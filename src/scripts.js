@@ -12,6 +12,9 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
+//const something = document.querySelector('');
+//const mgrDeleteButton = document.querySelector('');
+
 
 
 //domQuerySelectors
@@ -20,9 +23,6 @@ const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
 const navArea = document.querySelector('.nav-container');
 const loginArea = document.querySelector('.login-container');
-//const something = document.querySelector('');
-
-
 
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
@@ -85,27 +85,17 @@ const determineValidLogin = (custID,pwd) => {
   if(pwd !== "overlook2021") {
     return roomPrompts.innerHTML = "Invalid Password, please retype your password"
   }
-
-   roomPrompts.innerHTML = "Successful Login, loading Hotel Colorado Website Now!"
-
-   retrieveDataAfterLogin(parsedId)
+   roomPrompts.innerHTML = "Successful Login, loading Hotel Colorado Website Now!";
+   retrieveDataAfterLogin(parsedId);
 };
 
 const retrieveDataAfterLogin = (parsedID) => {
-  Promise.all(apiCalls.fetchAllCustomerData(parsedID)).then(data => setGlobalVariables(data));
+  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => setGlobalVariables(data));
   domUpdates.show(navArea);
   domUpdates.hide(loginArea);
 }
 
 //event listeners//
-
-
-// window.addEventListener("load",() => {
-//   //show the logon screen here!?!
-//   // domUpdates.showLogon();
-//   // Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
-// });
-
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
     event.preventDefault()
@@ -116,7 +106,6 @@ searchRoomButton.addEventListener("click",(event) => {
 
 roomsDisplay.addEventListener("click", (event) => {
   let input = event.target.dataset;
-
   if(event.target.id === "newBooking"){
     addBooking(input);
   }
