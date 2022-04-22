@@ -18,7 +18,8 @@ const logonButton = document.querySelector('#submitLogon');
 const userTextPrompts = document.querySelector('.user-text-prompts');
 const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
-//const something = document.querySelector('');
+const navArea = document.querySelector('.nav-container');
+const loginArea = document.querySelector('.login-container');
 //const something = document.querySelector('');
 
 
@@ -27,11 +28,12 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
 
 const setGlobalVariables = (fetchedData) => {
+  console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
 console.log('customersdata',customersData)
-  customer = new Customer(customersData[0]);
+  customer = new Customer(customersData);
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
@@ -85,13 +87,14 @@ const determineValidLogin = (custID,pwd) => {
   }
 
    roomPrompts.innerHTML = "Successful Login, loading Hotel Colorado Website Now!"
-   retrieveDataAfterLogin(parsedID)
+
+   retrieveDataAfterLogin(parsedId)
 };
 
 const retrieveDataAfterLogin = (parsedID) => {
-  Promise.all(apiCalls.fetchAllApiData(parsedID)).then(data => setGlobalVariables(data));
-  domUpdates.show('.nav-container');
-  domupdates.hide('.login-container');
+  Promise.all(apiCalls.fetchAllCustomerData(parsedID)).then(data => setGlobalVariables(data));
+  domUpdates.show(navArea);
+  domUpdates.hide(loginArea);
 }
 
 //event listeners//

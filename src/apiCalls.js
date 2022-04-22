@@ -1,14 +1,23 @@
 let apiCalls = {
 
 fetchOne(param) {
+  console.log(param)
     return fetch(`http://localhost:3001/api/v1/${param}`)
       .then((response) => response.json())
       .then((response) => response[param])
       .catch((error) => console.log(error));
   },
 
-fetchAllApiData(custID = "") {
-    return[this.fetchOne(`customers${custID}`),this.fetchOne("rooms"), this.fetchOne("bookings")];
+  fetchCustomer(param) {
+    console.log(param)
+      return fetch(`http://localhost:3001/api/v1/customers/${param}`)
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+    },
+
+fetchAllCustomerData(custID = "") {
+  console.log(custID)
+    return[this.fetchCustomer(custID),this.fetchOne("rooms"), this.fetchOne("bookings")];
   },
 
 postBooking(id,date,roomNum) {
