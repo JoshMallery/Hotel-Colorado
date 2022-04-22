@@ -39,12 +39,6 @@ noSearchResults(cardView,roomsMessage){
 },
 
 populateSearchCards(displayData,roomPrompt) {
-  // // consol.el
-  // if(displayData.length){
-  //   console.log('conditional working')
-  // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
-  // }
-
   let cardData= "";
    displayData.map(item =>{
     cardData +=
@@ -70,16 +64,16 @@ populateBookingCards(displayData,roomPrompt) {
    displayData.map(item =>{
     cardData +=
     `<section class="room-card">
-      <section class = "room-details">
+      <section class ="room-details">
         Room 1 twin bed, suite
         <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
       </section>
     </section>`
+
     // <section class ="room-card-buttons">
     // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
     // <button id="1" class="card-button">Managerial Delete</button>
     // </section>
-
 
   });
   return cardData
