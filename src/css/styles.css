@@ -23,7 +23,7 @@ main {
   width: 100%;
 }
 
-nav {
+.nav-container {
   display:flex;
   flex-direction: column;
   height: 60%;
@@ -55,7 +55,7 @@ nav {
 .user-prompts-container {
   display: flex;
   justify-content: space-around;
-  height: 5%;
+  height: 8%;
   width:100%;
 }
 
@@ -79,7 +79,7 @@ nav {
 }
 
 .room-viewing-container {
-  height: 80%;
+  height: 77%;
   width: 100%;
   display: flex;
   justify-content:space-around;
@@ -91,7 +91,7 @@ nav {
 
 .room-card {
   flex-direction: column;
-  display: Flex;
+  display: flex;
   height: 50%;
   width: 25%;
   margin: 20px;
@@ -131,4 +131,8 @@ nav {
 .manager-user-view {
   height: 60%;
   width: 30%;
+}
+
+.hidden {
+  visibility:hidden
 }

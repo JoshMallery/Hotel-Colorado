@@ -9,7 +9,7 @@
 <body>
   <header>Hotel - Colorado Banner Image</header>
   <main>
-    <nav class ="nav-container">
+    <nav class ="nav-container hidden">
       <button class="nav-displays" id="yourBookings">Your Bookings</button>
       <form class="nav-search" onsubmit="return false">
         <label for ="calendarDate"> Search For Availability by Date:</label>
@@ -38,7 +38,7 @@
     <section class="content-container">
       <section class="user-prompts-container">
         <section class="user-text-prompts">
-          Hello and Welcome to Hotel California, Your total spend at the Hotel is:     $500
+          Hello and Welcome to Hotel California, Please Login
         </section>
         <section class ="login-container">
           <form class ="login-data" onsubmit="return false">
@@ -47,13 +47,14 @@
             <br>
             <label>Password:</label>
             <input type="password" required>
-            <input type="submit" value="Logon!">
+            <input type="submit" id="submitLogon" value="Logon!">
           </form>
         </section>
       </section>
-      <section class="rooms-prompts-container">LOOK AT ALL this text!</section>
+      <section class="rooms-prompts-container">Please Login Above</section>
       <section class="room-viewing-container">
-        <section class="room-card">
+        <img src="./images/hotelPool.jpeg">
+        <!-- <section class="room-card">
           <section class = "room-details">
             Room 1 twin bed, suite
             <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
@@ -62,8 +63,8 @@
             <button id="newBooking"class ="card-button">Book Now!</button>
             <button id="1" class="card-button">Managerial Delete</button>
           </section>
-        </section>
-        <section class="room-card">
+        </section> -->
+        <!-- <section class="room-card">
           <section class = "room-details">
             Room 2 king bed, suite
             <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
@@ -92,9 +93,9 @@
             <button id="4" class ="card-button">Book Now!</button>
             <button id="4" class="card-button">Managerial Delete</button>
           </section>
-        </section>
+        </section> -->
       </section>
-      <section class="manager-container">
+      <section class="manager-container hidden">
         <section class="daily-revenue">Today's Hotel Revenue is $500</section>
         <section class="manager-user-view">
           <label for="userPick">Choose a User to View</label>
