@@ -11,6 +11,7 @@ greetCustomer(customerName,prompts) {
 },
 
 displayBookings(bookings,cardView) {
+  console.log(bookings)
     cardView.innerHTML = "";
     cardView.innerHTML = this.populateCards(bookings) || "No past or future bookings found, be sure to book a stay!";
 },
@@ -37,7 +38,6 @@ displaySearchResults(results,cardView) {
 populateCards(displayData) {
   let cardData= "";
    displayData.map(item =>{
-     console.log(item)
     cardData +=
     `<section class="room-card">
       <section class = "room-details">
@@ -49,6 +49,8 @@ populateCards(displayData) {
         <button id="1" class="card-button">Managerial Delete</button>
       </section>
     </section>`
+
+
   });
   return cardData
 }

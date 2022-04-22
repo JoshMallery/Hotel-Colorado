@@ -18,6 +18,7 @@ postBooking(id,date,roomNum) {
       headers: {"Content-Type": "application/json"}
     })
     .then(response => response.json())
+    .then(response => console.log("succuessful Post?",response))
     .catch((error) => console.log(error))
   },
   //

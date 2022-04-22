@@ -11,7 +11,7 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
 //const logonButton = document.querySelector(''); listen to the class of the parent!!
-const bookButton = document.querySelector('#newBooking');
+// const bookButton = document.querySelector('#newBooking');
 
 
 //domQuerySelectors
@@ -24,7 +24,7 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 
 
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
 
 domUpdates.loadPage('blah blah')
 
@@ -37,11 +37,11 @@ const setGlobalVariables = (fetchedData) => {
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
 
-  customer = new Customer(customersData[0]); //hardcoded for now as 1 customer
+  customer = new Customer(customersData[1]); //hardcoded for now as 1 customer
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
-  console.log("line 44 customers data",customersData)
+  // console.log("line 44 customers data",customersData)
 }
 
 const populateCustomer = (bookings,roomsInfo) => {
@@ -83,13 +83,22 @@ searchRoomButton.addEventListener("click",(event) => {
     event.preventDefault()
   const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
   searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
+  // bookButton = document.querySelector('#newBooking');
+  // console.log(bookButton)
 };
+});
+
+// bookButton.addEventListener("click",(event) =>{
+//   console.log(event.target)
+// })
+
+roomsDisplay.addEventListener("click", (event) => {
+  if(event.target.id === "newBooking"){
+    Promise.all([apiCalls.postBooking(parseInt(event.target.dataset.user),event.target.dataset.date,parseInt(event.target.dataset.room)),apiCalls.fetchOne('bookings')])
+    .then(data => populateCustomer(data[1],roomsData))
+  }
 });
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay)
-})
-
-bookButton.addEventListener("click",(event) =>{
-  console.log(event.target)
 })
