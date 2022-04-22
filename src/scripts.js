@@ -17,7 +17,7 @@ const goToBookingsButton = document.querySelector('.nav-displays');
 
 //domQuerySelectors
 const userTextPrompts = document.querySelector('.user-text-prompts');
-const roomPrompts = document.querySelector('.room-prompts-container');
+const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
 //const something = document.querySelector('');
 //const something = document.querySelector('');
@@ -42,7 +42,7 @@ const populateCustomer = (bookings,roomsInfo) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
-  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts);
+  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts);
 }
 
 const addBooking = (input) => {
@@ -93,5 +93,5 @@ roomsDisplay.addEventListener("click", (event) => {
 });
 
 goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings,roomsDisplay)
+  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)
 })

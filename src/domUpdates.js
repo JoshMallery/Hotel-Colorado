@@ -1,7 +1,7 @@
 let domUpdates = {
 
-loadCustomer(customer,cardView,textPrompts){
-  this.displayBookings(customer.bookings,cardView);
+loadCustomer(customer,cardView,textPrompts,roomPrompt){
+  this.displayBookings(customer.bookings,cardView,roomPrompt);
   this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 
@@ -9,10 +9,11 @@ greetCustomer(customerName,totalSpend,prompts) {
   prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
 
-displayBookings(bookings,cardView) {
+displayBookings(bookings,cardView,roomPrompt) {
   console.log(bookings)
     cardView.innerHTML = "";
     cardView.innerHTML = this.populateCards(bookings) || "No past or future bookings found, be sure to book a stay!";
+    roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
 },
 
 displayTotalSpend(amount,spendPrompt) {
@@ -30,6 +31,7 @@ displaySearchResults(results,cardView) {
 },
 
 populateCards(displayData) {
+
   let cardData= "";
    displayData.map(item =>{
     cardData +=
