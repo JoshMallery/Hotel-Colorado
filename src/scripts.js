@@ -11,15 +11,15 @@ import Rooms from './classes/Rooms.js'
 
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
-// const something = document.querySelector('');
-//const logonButton = document.querySelector('.logon-data'); listen to the class of the parent!!
+const logonButton = document.querySelector('#submitLogon');
 
 
 //domQuerySelectors
 const userTextPrompts = document.querySelector('.user-text-prompts');
 const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
-//const something = document.querySelector('');
+const navArea = document.querySelector('.nav-container');
+const loginArea = document.querySelector('.login-container');
 //const something = document.querySelector('');
 
 
@@ -28,11 +28,12 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
 
 const setGlobalVariables = (fetchedData) => {
+  console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
-
-  customer = new Customer(customersData[1]);
+console.log('customersdata',customersData)
+  customer = new Customer(customersData);
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
@@ -67,14 +68,43 @@ const transformFormDate = (date) => {
     }
   });
   return result.join("")
+};
+
+const determineValidLogin = (custID,pwd) => {
+  let splitId = custID.split("customer");
+
+  if(splitId.length !== 2){
+    return roomPrompts.innerHTML = "Invalid CustomerID, please check spelling and enter again";
+  }
+
+  let parsedId = parseInt(splitId[1]);
+  if(!(parsedId >= 1  && parsedId <=50)) {
+    return roomPrompts.innerHTML ="Invalid Customer Id Number, please veriy and try again";
+  }
+
+  if(pwd !== "overlook2021") {
+    return roomPrompts.innerHTML = "Invalid Password, please retype your password"
+  }
+
+   roomPrompts.innerHTML = "Successful Login, loading Hotel Colorado Website Now!"
+
+   retrieveDataAfterLogin(parsedId)
+};
+
+const retrieveDataAfterLogin = (parsedID) => {
+  Promise.all(apiCalls.fetchAllCustomerData(parsedID)).then(data => setGlobalVariables(data));
+  domUpdates.show(navArea);
+  domUpdates.hide(loginArea);
 }
 
 //event listeners//
-window.addEventListener("load",() => {
-  //show the logon screen here!?!
-  // domUpdates.showLogon();
-  Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
-});
+
+
+// window.addEventListener("load",() => {
+//   //show the logon screen here!?!
+//   // domUpdates.showLogon();
+//   // Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
+// });
 
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
@@ -91,6 +121,12 @@ roomsDisplay.addEventListener("click", (event) => {
     addBooking(input);
   }
 });
+
+logonButton.addEventListener("click", (event) => {
+  let input = event.target.parentNode.children
+  determineValidLogin(input[1].value,input[4].value)
+  console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
+})
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)

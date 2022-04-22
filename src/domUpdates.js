@@ -5,6 +5,14 @@ loadCustomer(customer,cardView,textPrompts,roomPrompt){
   this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 
+show(selector) {
+selector.classList.remove('hidden')
+},
+
+hide(selector) {
+selector.classList.add('hidden')
+},
+
 greetCustomer(customerName,totalSpend,prompts) {
   prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
