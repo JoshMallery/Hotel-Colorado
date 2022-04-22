@@ -26,9 +26,9 @@ main {
 nav {
   display:flex;
   flex-direction: column;
-  height: 70%;
+  height: 60%;
   width: 15%;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items:center;
 }
 

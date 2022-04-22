@@ -2,7 +2,6 @@ let domUpdates = {
 
 loadCustomer(customer,cardView,textPrompts){
   this.displayBookings(customer.bookings,cardView);
-  // this.displayTotalSpend(customer.calculateSpend(),spendPrompts);
   this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 

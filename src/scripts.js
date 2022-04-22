@@ -10,7 +10,8 @@ import Rooms from './classes/Rooms.js'
 //buttons, login etc.
 
 const searchRoomButton = document.querySelector('.nav-search');
-const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
+const goToBookingsButton = document.querySelector('.nav-displays');
+// const something = document.querySelector('');
 //const logonButton = document.querySelector(''); listen to the class of the parent!!
 
 
