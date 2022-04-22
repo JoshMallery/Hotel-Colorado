@@ -1,13 +1,13 @@
 let domUpdates = {
 
-loadCustomer(customer,cardView,textprompts,spendPrompts){
+loadCustomer(customer,cardView,textPrompts){
   this.displayBookings(customer.bookings,cardView);
-  this.displayTotalSpend(customer.calculateSpend(),spendPrompts);
-  this.greetCustomer(customer.name,textprompts);
+  // this.displayTotalSpend(customer.calculateSpend(),spendPrompts);
+  this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 
-greetCustomer(customerName,prompts) {
-  prompts.innerText = `Hello! and Welcome back ${customerName}`
+greetCustomer(customerName,totalSpend,prompts) {
+  prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
 
 displayBookings(bookings,cardView) {

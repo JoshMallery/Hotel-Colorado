@@ -12,12 +12,11 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');// const something = document.querySelector('');
 //const logonButton = document.querySelector(''); listen to the class of the parent!!
-// const bookButton = document.querySelector('#newBooking');
 
 
 //domQuerySelectors
-const textPrompts = document.querySelector('.text-prompts');
-const custSpend = document.querySelector('.customer-spend');
+const userTextPrompts = document.querySelector('.user-text-prompts');
+const roomPrompts = document.querySelector('.room-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
 //const something = document.querySelector('');
 //const something = document.querySelector('');
@@ -42,7 +41,7 @@ const populateCustomer = (bookings,roomsInfo) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
-  domUpdates.loadCustomer(customer,roomsDisplay,textPrompts,custSpend);
+  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts);
 }
 
 const addBooking = (input) => {
