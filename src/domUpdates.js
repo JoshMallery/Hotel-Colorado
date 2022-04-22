@@ -1,44 +1,91 @@
 let domUpdates = {
 
-loadCustomer(customer){
-  displayBookings(customer.bookings);
-  showTotalSpend(customer.calculateSpend());
+loadCustomer(customer,cardView,textPrompts,roomPrompt){
+  this.displayBookings(customer.bookings,cardView,roomPrompt);
+  this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 
-displayBookings(bookings) {
-  //viewcards innerhtml = ""
-  //   viewcards,innerHTML = populateCards(bookings)
-  // if(viewcards innerhtml ===""){
-  //   innerhtml = " no bookings found"
-  // }
+greetCustomer(customerName,totalSpend,prompts) {
+  prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
 
-displayTotalSpend(amount) {
-  //innerhtml of spend = `$${amount}`
+displayBookings(bookings,cardView,roomPrompt) {
+  console.log(bookings)
+    cardView.innerHTML = "";
+    cardView.innerHTML = this.populateBookingCards(bookings) || "No past or future bookings found, be sure to book a stay!";
+    roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
 },
 
-loadPage(info){
-  console.log('loaded page',info)
+displayBookingConfirm(roomPrompt,searchForm) {
+roomPrompt.innerHTML = "Your New Booking is Confirmed!"
+searchForm.reset();
 },
 
 refreshPage() {
 
 },
 
-displaySearchResults(results) {
-  //viewcards innerhtml = ""
-  //   viewcards,innerHTML = populateCards(results)
-  // if(viewcards innerhtml ===""){
-  //   innerhtml = " SORRY no rooms available that date"
-  // }
+displaySearchResults(results,cardView,roomPrompt) {
+  console.log("results from a search!!", results)
+  cardView.innerHTML = "";
+  cardView.innerHTML = this.populateSearchCards(results,roomPrompt) || this.noSearchResults(cardView,roomPrompt)
+  roomPrompt.innerHTML = `${results.length} rooms have availability on ${results[0].bookingDate}`; //only way to fix right now is not have the date?
 },
 
-populateCards(displayData) {
-  // let cardData
-  // return displayData.forEach(item =>{
-  //   //cardData += //add the individual cards and buttons here
-  })
+noSearchResults(cardView,roomsMessage){
+  console.log(cardView)
+  roomsMessage.innerHTML = "No Rooms have availability that date."
+  return cardView.innerHTML = "SORRY no rooms available that date, please adjust your parameters and search again!"
+},
 
+populateSearchCards(displayData,roomPrompt) {
+  let cardData= "";
+   displayData.map(item =>{
+    cardData +=
+    `<section class="room-card">
+      <section class = "room-details">
+        Night of Stay: ${item.bookingDate}<br>
+        Room Type: ${item.roomType} with ${item.bedSize} bed<br>
+        Nightly Rate: $${item.costPerNight}
+        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
+      </section>
+      <section class ="room-card-buttons">
+        <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
+      </section>
+    </section>`
+
+    // <button id="1" class="card-button">Managerial Delete</button>
+
+  });
+  return cardData
+},
+
+populateBookingCards(displayData,roomPrompt) {
+  // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
+  let cardData= "";
+
+  //add date of stay
+  //room of stay
+  //cost of trip
+  // displayData.sort((a,b) => b.date - a.date)
+  displayData
+    .reverse()
+    .map(item =>{
+      cardData +=
+      `<section class="room-card">
+        <section class ="room-details">
+          Date of Stay: ${item.date}<br> Room Number: ${item.roomNumber}<br> Cost of stay: $${item.amount}
+          <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.roomNumber}">
+        </section>
+      </section>`
+
+    // <section class ="room-card-buttons">
+    // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
+    // <button id="1" class="card-button">Managerial Delete</button>
+    // </section>
+
+  });
+  return cardData
 }
 
 

@@ -4,7 +4,7 @@ fetchOne(param) {
     return fetch(`http://localhost:3001/api/v1/${param}`)
       .then((response) => response.json())
       .then((response) => response[param])
-      .catch((error) => displayError(error));
+      .catch((error) => console.log(error));
   },
 
 fetchAllApiData() {
@@ -18,6 +18,7 @@ postBooking(id,date,roomNum) {
       headers: {"Content-Type": "application/json"}
     })
     .then(response => response.json())
+    .then(response => console.log("succuessful Post?",response))
     .catch((error) => console.log(error))
   },
   //
