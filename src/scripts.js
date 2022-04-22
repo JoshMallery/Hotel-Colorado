@@ -30,8 +30,8 @@ const setGlobalVariables = (fetchedData) => {
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
-
-  customer = new Customer(customersData[1]);
+console.log('customersdata',customersData)
+  customer = new Customer(customersData[0]);
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
@@ -66,14 +66,42 @@ const transformFormDate = (date) => {
     }
   });
   return result.join("")
+};
+
+const determineValidLogin = (custID,pwd) => {
+  let splitId = custID.split("customer");
+
+  if(splitId.length !== 2){
+    return roomPrompts.innerHTML = "Invalid CustomerID, please check spelling and enter again";
+  }
+
+  let parsedId = parseInt(splitId[1]);
+  if(!(parsedId >= 1  && parsedId <=50)) {
+    return roomPrompts.innerHTML ="Invalid Customer Id Number, please veriy and try again";
+  }
+
+  if(pwd !== "overlook2021") {
+    return roomPrompts.innerHTML = "Invalid Password, please retype your password"
+  }
+
+   roomPrompts.innerHTML = "Successful Login, loading Hotel Colorado Website Now!"
+   retrieveDataAfterLogin(parsedID)
+};
+
+const retrieveDataAfterLogin = (parsedID) => {
+  Promise.all(apiCalls.fetchAllApiData(parsedID)).then(data => setGlobalVariables(data));
+  domUpdates.show('.nav-container');
+  domupdates.hide('.login-container');
 }
 
 //event listeners//
-window.addEventListener("load",() => {
-  //show the logon screen here!?!
-  // domUpdates.showLogon();
-  // Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
-});
+
+
+// window.addEventListener("load",() => {
+//   //show the logon screen here!?!
+//   // domUpdates.showLogon();
+//   // Promise.all(apiCalls.fetchAllApiData()).then(data => setGlobalVariables(data));
+// });
 
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
@@ -92,6 +120,8 @@ roomsDisplay.addEventListener("click", (event) => {
 });
 
 logonButton.addEventListener("click", (event) => {
+  let input = event.target.parentNode.children
+  determineValidLogin(input[1].value,input[4].value)
   console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
 })
 

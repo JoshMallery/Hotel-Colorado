@@ -7,8 +7,8 @@ fetchOne(param) {
       .catch((error) => console.log(error));
   },
 
-fetchAllApiData() {
-    return[this.fetchOne("customers"),this.fetchOne("rooms"), this.fetchOne("bookings")];
+fetchAllApiData(custID = "") {
+    return[this.fetchOne(`customers${custID}`),this.fetchOne("rooms"), this.fetchOne("bookings")];
   },
 
 postBooking(id,date,roomNum) {
