@@ -12,7 +12,7 @@ greetCustomer(customerName,totalSpend,prompts) {
 displayBookings(bookings,cardView,roomPrompt) {
   console.log(bookings)
     cardView.innerHTML = "";
-    cardView.innerHTML = this.populateCards(bookings) || "No past or future bookings found, be sure to book a stay!";
+    cardView.innerHTML = this.populateBookingCards(bookings) || "No past or future bookings found, be sure to book a stay!";
     roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
 },
 
@@ -24,13 +24,25 @@ refreshPage() {
 
 },
 
-displaySearchResults(results,cardView) {
+displaySearchResults(results,cardView,roomPrompt) {
   console.log("results from a search!!", results)
   cardView.innerHTML = "";
-  cardView.innerHTML = this.populateCards(results) || "SORRY no rooms available that date, please adjust your parameters and search again!"
+  cardView.innerHTML = this.populateSearchCards(results,roomPrompt) || this.noSearchResults(cardView,roomPrompt)
+  roomPrompt.innerHTML = `${results.length} rooms have availability on ${results[0].bookingDate}`;
 },
 
-populateCards(displayData) {
+noSearchResults(cardView,roomsMessage){
+  console.log(cardView)
+  roomsMessage.innerHTML = "No Rooms have availability that date."
+  return cardView.innerHTML = "SORRY no rooms available that date, please adjust your parameters and search again!"
+},
+
+populateSearchCards(displayData,roomPrompt) {
+  // // consol.el
+  // if(displayData.length){
+  //   console.log('conditional working')
+  // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
+  // }
 
   let cardData= "";
    displayData.map(item =>{
@@ -42,9 +54,30 @@ populateCards(displayData) {
       </section>
       <section class ="room-card-buttons">
         <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
-        <button id="1" class="card-button">Managerial Delete</button>
       </section>
     </section>`
+
+    // <button id="1" class="card-button">Managerial Delete</button>
+
+  });
+  return cardData
+},
+
+populateBookingCards(displayData,roomPrompt) {
+  // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
+  let cardData= "";
+   displayData.map(item =>{
+    cardData +=
+    `<section class="room-card">
+      <section class = "room-details">
+        Room 1 twin bed, suite
+        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
+      </section>
+    </section>`
+    // <section class ="room-card-buttons">
+    // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
+    // <button id="1" class="card-button">Managerial Delete</button>
+    // </section>
 
 
   });

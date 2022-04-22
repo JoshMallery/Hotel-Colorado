@@ -55,7 +55,7 @@ const refreshBookings = () => {
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
-  domUpdates.displaySearchResults(results,roomsDisplay);
+  domUpdates.displaySearchResults(results,roomsDisplay,roomPrompts);
 }
 
 const transformFormDate = (date) => {
