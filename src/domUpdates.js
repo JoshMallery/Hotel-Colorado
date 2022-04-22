@@ -16,8 +16,9 @@ displayBookings(bookings,cardView,roomPrompt) {
     roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
 },
 
-displayTotalSpend(amount,spendPrompt) {
-  spendPrompt.innerText = `Hotel Colorado Spend: $${amount}`
+displayBookingConfirm(roomPrompt,searchForm) {
+roomPrompt.innerHTML = "Your New Booking is Confirmed!"
+searchForm.reset();
 },
 
 refreshPage() {
@@ -28,7 +29,7 @@ displaySearchResults(results,cardView,roomPrompt) {
   console.log("results from a search!!", results)
   cardView.innerHTML = "";
   cardView.innerHTML = this.populateSearchCards(results,roomPrompt) || this.noSearchResults(cardView,roomPrompt)
-  roomPrompt.innerHTML = `${results.length} rooms have availability on ${results[0].bookingDate}`;
+  roomPrompt.innerHTML = `${results.length} rooms have availability on ${results[0].bookingDate}`; //only way to fix right now is not have the date?
 },
 
 noSearchResults(cardView,roomsMessage){

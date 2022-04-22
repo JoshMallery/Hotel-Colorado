@@ -50,7 +50,7 @@ const addBooking = (input) => {
 }
 
 const refreshBookings = () => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => populateCustomer(data[0],roomsData));
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
