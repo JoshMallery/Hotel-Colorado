@@ -23,6 +23,7 @@ const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
 const navArea = document.querySelector('.nav-container');
 const loginArea = document.querySelector('.login-container');
+const mgrArea = document.querySelector('.manager-container');
 
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
@@ -59,6 +60,8 @@ const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   domUpdates.displaySearchResults(results,roomsDisplay,roomPrompts);
 }
 
+
+
 const transformFormDate = (date) => {
   const result = date.split("").map(num => {
     if(num === "-"){
@@ -73,13 +76,17 @@ const transformFormDate = (date) => {
 const determineValidLogin = (custID,pwd) => {
   let splitId = custID.split("customer");
 
+  if(custID === 'manager' && pwd === 'overlook2021'){
+    return retrieveManagerLogin()
+  }
+
   if(splitId.length !== 2){
     return roomPrompts.innerHTML = "Invalid CustomerID, please check spelling and enter again";
   }
 
   let parsedId = parseInt(splitId[1]);
   if(!(parsedId >= 1  && parsedId <=50)) {
-    return roomPrompts.innerHTML ="Invalid Customer Id Number, please veriy and try again";
+    return roomPrompts.innerHTML ="Invalid Customer Id Number, please verify and try again";
   }
 
   if(pwd !== "overlook2021") {
@@ -92,6 +99,13 @@ const determineValidLogin = (custID,pwd) => {
 const retrieveDataAfterLogin = (parsedID) => {
   Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => setGlobalVariables(data));
   domUpdates.show(navArea);
+  domUpdates.hide(loginArea);
+}
+
+const retrieveManagerLogin = () => {
+  Promise.all(apiCalls.fetchManagerData()).then(data => setGlobalVariables(data));
+  domUpdates.show(navArea);
+  domUpdates.show(mgrArea);
   domUpdates.hide(loginArea);
 }
 
@@ -113,6 +127,7 @@ roomsDisplay.addEventListener("click", (event) => {
 
 logonButton.addEventListener("click", (event) => {
   let input = event.target.parentNode.children
+
   determineValidLogin(input[1].value,input[4].value)
   console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
 })
