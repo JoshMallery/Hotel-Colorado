@@ -55,7 +55,7 @@ populateSearchCards(displayData,roomPrompt) {
         Night of Stay: ${item.bookingDate}<br>
         Room Type: ${item.roomType} with ${item.bedSize} bed<br>
         Nightly Rate: $${item.costPerNight}
-        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
+        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.number}">
       </section>
       <section class ="room-card-buttons">
         <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
@@ -68,7 +68,7 @@ populateSearchCards(displayData,roomPrompt) {
   return cardData
 },
 
-populateBookingCards(displayData,roomPrompt) {
+populateBookingCards(displayData,roomPrompt) { //pass in another variable for manager that shows the delete button.
   // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
   let cardData= "";
 
