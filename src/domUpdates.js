@@ -22,6 +22,10 @@ displayBookings(bookings,cardView,roomPrompt) {
     cardView.innerHTML = "";
     cardView.innerHTML = this.populateBookingCards(bookings) || "No past or future bookings found, be sure to book a stay!";
     roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
+    //MANAGER SHOW BUTTON LOGIC?
+    //if manager {
+    //this.show(mgrbutton)
+  //}
 },
 
 displayBookingConfirm(roomPrompt,searchForm) {
@@ -68,14 +72,11 @@ populateSearchCards(displayData,roomPrompt) {
   return cardData
 },
 
-populateBookingCards(displayData,roomPrompt) { //pass in another variable for manager that shows the delete button.
-  // roomPrompt.innerHTML = `${displayData.length} rooms have availability on ${displayData[0].bookingDate}`;
+populateBookingCards(displayData,roomPrompt) {
+
+console.log(displayData)
   let cardData= "";
 
-  //add date of stay
-  //room of stay
-  //cost of trip
-  // displayData.sort((a,b) => b.date - a.date)
   displayData
     .reverse()
     .map(item =>{
@@ -85,16 +86,38 @@ populateBookingCards(displayData,roomPrompt) { //pass in another variable for ma
           Date of Stay: ${item.date}<br> Room Number: ${item.roomNumber}<br> Cost of stay: $${item.amount}
           <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.roomNumber}">
         </section>
+        <section class ="room-card-buttons hidden">
+        <button id="deleteBooking" data-booking-id ="${item.id}" class="card-button">Delete Booking</button>
+        </section>
+      </section>`
+  });
+  return cardData
+  //be sure to find the logic to make the manager button show up, AFTER! this entire function has been ran
+},
+
+populateManagerBookingCards(displayData,roomPrompt) {
+
+  let cardData= "";
+
+  displayData
+    .reverse()
+    .map(item =>{
+      cardData +=
+      `<section class="room-card">
+        <section class ="room-details">
+          Date of Stay: ${item.date}<br> Room Number: ${item.roomNumber}<br> Cost of stay: $${item.amount}
+          <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.roomNumber}">
+        </section>
+        <section class ="room-card-buttons">
+        <button id="deleteBooking" data-booking-id ="${item.id}" class="card-button">Delete Booking</button>
+        </section>
       </section>`
 
-    // <section class ="room-card-buttons">
-    // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
-    // <button id="1" class="card-button">Managerial Delete</button>
-    // </section>
+      // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
 
   });
   return cardData
-}
+},
 
 
 }
