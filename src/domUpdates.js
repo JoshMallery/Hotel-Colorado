@@ -13,21 +13,29 @@ hide(selector) {
 selector.classList.add('hidden')
 },
 
-managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown) {
+managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,textPrompts,roomPrompt,cardView,bookNowButton) {
   mgrInfo.innerHTML = `
   Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms)}<br>
   Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%
   `;
 
+  textPrompts.innerText = `Hello Manager, today's date is ${currentDate}.`
   this.mgrLoadCustomerSelect(customersData,mgrDropDown);
+  this.mgrRoomsAvailableToday(manager,roomPrompt,cardView);
+  this.hide(bookNowButton);
+},
+
+mgrRoomsAvailableToday(manager,roomPrompt,cardView) {
+cardView.innerHTML = this.populateRoomsTodayCards(manager.roomsAvailableToday,roomPrompt);
+roomPrompt.innerHTML = "Today's Available Rooms";
 },
 
 mgrLoadCustomerSelect(customersData,mgrDropDown) {
- mgrDropDown.innerHTML=`<option value="null">Please Select a User</option>`;
+ mgrDropDown.innerHTML="";
 
   customersData.forEach(customer => {
     mgrDropDown.innerHTML +=`
-      <option value ="${customer.name}" data-userID="${customer.id}">
+      <option value ="${customer.id}" data-userID="${customer.id}">${customer.name}</input>
       `;
   });
 },
@@ -85,6 +93,27 @@ populateSearchCards(displayData,roomPrompt) {
       </section>
     </section>`
 
+    // <button id="1" class="card-button">Managerial Delete</button>
+
+  });
+  return cardData
+},
+populateRoomsTodayCards(displayData,roomPrompt) {
+  let cardData= "";
+   displayData.map(item =>{
+    cardData +=
+    `<section class="room-card">
+      <section class = "room-details">
+        Night of Stay: ${item.bookingDate}<br>
+        Room Type: ${item.roomType} with ${item.bedSize} bed<br>
+        Nightly Rate: $${item.costPerNight}
+        <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.number}">
+      </section>
+    </section>`
+
+    // <section class ="room-card-buttons">
+    // <button id="newBooking" data-user="${item.customerID}" data-date="${item.bookingDate}" data-room=${item.number} class="card-button">Book Now!</button>
+    // </section>
     // <button id="1" class="card-button">Managerial Delete</button>
 
   });

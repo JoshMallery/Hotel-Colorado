@@ -12,7 +12,8 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
-const mgrDropDown = document.querySelector('#managerUserPick')
+const mgrDropDown = document.querySelector('#managerUserPick');
+const bookNowButton = document.querySelector('.card-button');
 //const something = document.querySelector('');
 //const mgrDeleteButton = document.querySelector('');
 
@@ -26,7 +27,7 @@ const navArea = document.querySelector('.nav-container');
 const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
 const mgrInfo = document.querySelector('.daily-info');
-
+const mgrCustSelect = document.querySelector('#mgrSelection');
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
 
@@ -89,7 +90,7 @@ const populateManager = (bookings,roomsInfo) => {
   // const percentOccupied = manager.percentOccupied(roomsData,occupiedRooms) //keep in the manager class and pass it to the DOM
   // console.log(percentOccupied)
 
-  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown)
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton)
 }
 
 const addBooking = (input) => {
@@ -176,8 +177,16 @@ logonButton.addEventListener("click", (event) => {
 
   determineValidLogin(input[1].value,input[4].value)
   console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
-})
+});
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)
+});
+
+mgrCustSelect.addEventListener("change",(event)=>{
+//loadCustomer(event.target.value)
+  console.log(event.target.value)
+  console.log(event.target.dataset.userID)
+    console.log(event.target)
+
 })
