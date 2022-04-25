@@ -95,11 +95,11 @@ const populateManager = (bookings,roomsInfo) => {
 }
 
 const addBooking = (input) => {
-  Promise.all([apiCalls.removeBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
 }
 
-const deleteBooking = (input) => {
-  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
+const deleteBooking = (bookingID) => {
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings());
 }
 
 const refreshBookings = () => {
@@ -176,7 +176,7 @@ roomsDisplay.addEventListener("click", (event) => {
 
   if(event.target.id === "deleteBooking"){
     console.log(input.bookingId)
-    removeBooking(input.bookingId);
+    deleteBooking(input.bookingId);
   }
 });
 

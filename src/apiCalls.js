@@ -34,10 +34,17 @@ postBooking(id,date,roomNum) {
     .then(response => console.log("succuessful Post?",response))
     .catch((error) => console.log(error))
   },
-  //
-  // removeBooking(bookingInfo) {
-  //   fetch()
-  // }
+
+  removeBooking(bookingInfo) {
+    return fetch(`http://localhost:3001/api/v1/bookings/${bookingInfo}`, {
+      method: "DELETE",
+      // body:JSON.stringify({ "userID": id, "date": date, "roomNumber": roomNum }),
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(response => console.log("successful Delete",response))
+    .catch((error) => console.log(error));
+  }
 
 };
 export default apiCalls;
