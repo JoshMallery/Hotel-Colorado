@@ -6,33 +6,40 @@ loadCustomer(customer,cardView,textPrompts,roomPrompt,isManager,currentDate){
 },
 
 show(selector) {
-  selector.classList.remove('hidden')
+  selector.classList.remove('hidden');
 },
 
 hide(selector) {
-  selector.classList.add('hidden')
+  selector.classList.add('hidden');
 },
 
 setCalendar(calendarMin,calendar) {
-  console.log("domupdates cal",calendar)
-  console.log("domUpdates Cal Val",calendar.value)
+  console.log("domupdates cal",calendar);
+  console.log("domUpdates Cal Val",calendar.value);
   calendar.value = calendarMin
   calendar.min = calendarMin;
 },
 
 managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,textPrompts,roomPrompt,cardView,bookNowButton,isManager) {
-  mgrInfo.innerHTML = `
-  Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms).toFixed(2)}<br>
-  Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%`;
+  this.managerToolbarText(manager,mgrInfo,roomsData)
+// mgrInfo.innerHTML = `
+//   Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms).toFixed(2)}<br>
+//   Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%`;
 
   textPrompts.innerText = `Hello Manager, today's date is ${currentDate}.`
   this.mgrLoadCustomerSelect(customersData,mgrDropDown);
   this.mgrRoomsAvailableToday(manager,roomPrompt,cardView,isManager);
 },
 
+managerToolbarText (manager,mgrInfo,roomsData) {
+  mgrInfo.innerHTML = `
+  Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms).toFixed(2)}<br>
+  Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%`;
+},
+
 mgrRoomsAvailableToday(manager,roomPrompt,cardView,isManager) {
 cardView.innerHTML = this.populateSearchCards(manager.roomsAvailableToday,roomPrompt,isManager);
-roomPrompt.innerHTML = "Today's Available Rooms";
+roomPrompt.innerHTML = "Today's Available Rooms are below --- To View, Search, and Edit a Users Rooms Use the Manager Toolbar Above";
 },
 
 mgrLoadCustomerSelect(customersData,mgrDropDown) {
@@ -101,25 +108,7 @@ populateSearchCards(displayData,roomPrompt,isManager) {
   return cardData
 },
 
-// populateRoomsTodayCards(displayData,roomPrompt) {
-//   let cardData= "";
-//    displayData.map(item =>{
-//     cardData +=
-//     `<section class="room-card">
-//       <section class = "room-details">
-//         Night of Stay: ${item.bookingDate}<br>
-//         Room Type: ${item.roomType} with ${item.bedSize} bed<br>
-//         Nightly Rate: $${item.costPerNight}
-//         <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.number}">
-//       </section>
-//     </section>`
-//
-//   });
-//   return cardData
-// },
-
 populateBookingCards(displayData,roomPrompt,isManager,currentDate) {
-
 console.log(displayData)
   let cardData= "";
 
@@ -144,7 +133,7 @@ console.log(displayData)
       </section>`
   });
   roomPrompt.innerHTML = `You have made ${displayData.length} bookings with Hotel Colorado.`;
-  return cardData
+  return cardData;
 },
 
 }
