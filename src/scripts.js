@@ -26,18 +26,27 @@ const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
 
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
+  currentDate = computeDate()
 console.log('customersdata',customersData)
   customer = new Customer(customersData);
   rooms = new Rooms(roomsData);
 
   populateCustomer(bookingsData,roomsData);
+}
+
+const computeDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  return `${year}/${month}/${day}`;
 }
 
 const populateCustomer = (bookings,roomsInfo) => {
@@ -81,12 +90,12 @@ const determineValidLogin = (custID,pwd) => {
   }
 
   if(splitId.length !== 2){
-    return roomPrompts.innerHTML = "Invalid CustomerID, please check spelling and enter again";
+    return roomPrompts.innerHTML = "Invalid UserID, please check spelling and enter again";
   }
 
   let parsedId = parseInt(splitId[1]);
   if(!(parsedId >= 1  && parsedId <=50)) {
-    return roomPrompts.innerHTML ="Invalid Customer Id Number, please verify and try again";
+    return roomPrompts.innerHTML = "Invalid UserID Number, please verify and try again";
   }
 
   if(pwd !== "overlook2021") {
