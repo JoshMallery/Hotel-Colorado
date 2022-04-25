@@ -29,7 +29,7 @@ const mgrArea = document.querySelector('.manager-container');
 const mgrInfo = document.querySelector('.daily-info');
 const mgrCustSelect = document.querySelector('#mgrSelection');
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager;
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
@@ -38,7 +38,7 @@ const setGlobalVariables = (fetchedData) => {
   bookingsData = fetchedData[2];
   currentDate = computeDate();
   //BE SURE TO DELETE THE LINE BELOW THIS!!!!
-  currentDate = "2022/04/18"; //BE SURE TO DELETE THIS LINE
+  currentDate = "2022/02/10"; //BE SURE TO DELETE THIS LINE
 
 console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
@@ -46,6 +46,7 @@ console.log('customersdata',customersData)
   if (fetchedData[0].length === 50){
     console.log("line 45 set globals manager triggered")
     manager = new Manager();
+    isManager = true;
     populateManager(bookingsData,roomsData);
   } else {
     console.log("line 41 set globals customer triggered")
@@ -62,11 +63,11 @@ const computeDate = () => {
   return `${year}/${month}/${day}`;
 }
 
-const populateCustomer = (bookings,roomsInfo) => {
+const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
-  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts);
+  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts,isManager,currentDate);
 }
 
 const populateManager = (bookings,roomsInfo) => {
@@ -98,7 +99,7 @@ const addBooking = (input) => {
 }
 
 const refreshBookings = () => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
@@ -185,7 +186,7 @@ mgrCustSelect.addEventListener("change",(event)=>{
 //loadCustomer(event.target.value)
 console.log("target+1",parseInt(event.target.value)-1)
 customer = new Customer(customersData[parseInt(event.target.value)-1]);
-populateCustomer(bookingsData,roomsData);
+populateCustomer(bookingsData,roomsData,isManager,currentDate);
   console.log("target",event.target.value)
   console.log(event.target.dataset.userID)
     console.log(event.target)

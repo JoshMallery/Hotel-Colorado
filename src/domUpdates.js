@@ -1,7 +1,7 @@
 let domUpdates = {
 
-loadCustomer(customer,cardView,textPrompts,roomPrompt){
-  this.displayBookings(customer.bookings,cardView,roomPrompt);
+loadCustomer(customer,cardView,textPrompts,roomPrompt,isManager,currentDate){
+  this.displayBookings(customer.bookings,cardView,roomPrompt,isManager,currentDate);
   this.greetCustomer(customer.name,customer.calculateSpend(),textPrompts);
 },
 
@@ -44,10 +44,10 @@ greetCustomer(customerName,totalSpend,prompts) {
   prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
 
-displayBookings(bookings,cardView,roomPrompt,isManager,managerBtnElement) {
+displayBookings(bookings,cardView,roomPrompt,isManager,currentDate) {
   console.log(bookings)
     cardView.innerHTML = "";
-    cardView.innerHTML = this.populateBookingCards(bookings) || "No past or future bookings found, be sure to book a stay!";
+    cardView.innerHTML = this.populateBookingCards(bookings,isManager,currentDate) || "No past or future bookings found, be sure to book a stay!";
     roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
     //MANAGER SHOW BUTTON LOGIC?
     //if (isManager) {
@@ -120,7 +120,7 @@ populateRoomsTodayCards(displayData,roomPrompt) {
   return cardData
 },
 
-populateBookingCards(displayData,roomPrompt) {
+populateBookingCards(displayData,isManager,currentDate) {
 
 console.log(displayData)
   let cardData= "";
@@ -128,13 +128,20 @@ console.log(displayData)
   displayData
     .reverse()
     .map(item =>{
+      let hide = "hidden"
+
+      if(isManager && (new Date(currentDate) < new Date(item.date))) {
+        //insert logic to determine if booking date is great or less
+        hide = ""
+      }
+
       cardData +=
       `<section class="room-card">
         <section class ="room-details">
           Date of Stay: ${item.date}<br> Room Number: ${item.roomNumber}<br> Cost of stay: $${item.amount}
           <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room ${item.roomNumber}">
         </section>
-        <section class ="room-card-buttons hidden">
+        <section class ="room-card-buttons ${hide}">
         <button id="deleteBooking" data-booking-id ="${item.id}" class="card-button">Delete Booking</button>
         </section>
       </section>`
