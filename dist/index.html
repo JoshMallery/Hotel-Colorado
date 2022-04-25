@@ -41,11 +41,11 @@
         </section>
         <section class ="login-container">
           <form class ="login-data" onsubmit="return false">
-            <label>UserID:</label>
-            <input type="text" required>
+            <label for="userID" >UserID:</label>
+            <input id="userID" type="text" required>
             <br>
-            <label>Password:</label>
-            <input type="password" required>
+            <label for="password">Password:</label>
+            <input id="password" type="password" required>
             <input type="submit" id="submitLogon" value="Logon!">
           </form>
         </section>
@@ -54,7 +54,7 @@
         <p>Manager ToolBar:</p>
         <form class="manager-user-view">
           <label for="userPick">Choose a User to View</label>
-          <input name="userPick" id="mgrSelection" list="managerUserPick">
+          <input name="userPick" id="mgrSelection" list="managerUserPick" placeholder="Select A User">
         </form>
         <section class="daily-info">
           Today's Hotel Revenue is $500<br>
