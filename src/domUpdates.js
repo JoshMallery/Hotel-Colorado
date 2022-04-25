@@ -22,7 +22,7 @@ managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDro
   textPrompts.innerText = `Hello Manager, today's date is ${currentDate}.`
   this.mgrLoadCustomerSelect(customersData,mgrDropDown);
   this.mgrRoomsAvailableToday(manager,roomPrompt,cardView);
-  this.hide(bookNowButton);
+  // this.hide(bookNowButton);
 },
 
 mgrRoomsAvailableToday(manager,roomPrompt,cardView) {

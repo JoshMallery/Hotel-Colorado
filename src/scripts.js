@@ -106,8 +106,6 @@ const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   domUpdates.displaySearchResults(results,roomsDisplay,roomPrompts);
 }
 
-
-
 const transformFormDate = (date) => {
   const result = date.split("").map(num => {
     if(num === "-"){
@@ -185,7 +183,10 @@ goToBookingsButton.addEventListener("click",() => {
 
 mgrCustSelect.addEventListener("change",(event)=>{
 //loadCustomer(event.target.value)
-  console.log(event.target.value)
+console.log("target+1",parseInt(event.target.value)-1)
+customer = new Customer(customersData[parseInt(event.target.value)-1]);
+populateCustomer(bookingsData,roomsData);
+  console.log("target",event.target.value)
   console.log(event.target.dataset.userID)
     console.log(event.target)
 
