@@ -26,7 +26,7 @@ const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
 
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
@@ -35,10 +35,14 @@ const setGlobalVariables = (fetchedData) => {
   bookingsData = fetchedData[2];
   currentDate = computeDate()
 console.log('customersdata',customersData)
-  customer = new Customer(customersData);
   rooms = new Rooms(roomsData);
-
-  populateCustomer(bookingsData,roomsData);
+  if (fetchedData[0].length === 1){
+      customer = new Customer(customersData);
+      populateCustomer(bookingsData,roomsData);
+  } else {
+      manager = new Customer({id:0,name:'Hotel Manager'}); //might not need this line
+      populateManager(bookingsData,roomsData);
+  }
 }
 
 const computeDate = () => {
@@ -54,6 +58,16 @@ const populateCustomer = (bookings,roomsInfo) => {
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
   domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts);
+}
+
+const populateManager = (bookings,roomsInfo) => {
+  //show rooms available for todays date  use the datefilter
+  const roomsToday = rooms.dateFilter(currentDate,bookings);
+  //shoe revenue for todays date// use the customer class for this
+  const revenueToday = rooms.revenueToday(currentDate,roomsToday);
+  //percentage of rooms occupied //use the rooms class for this.
+  const percentOccupied = rooms.percentOccupied(currentDate,bookings);
+  domUpdates.managerViews(roomsToday,revenueToday,percentOccupied)
 }
 
 const addBooking = (input) => {
@@ -116,6 +130,7 @@ const retrieveManagerLogin = () => {
   domUpdates.show(navArea);
   domUpdates.show(mgrArea);
   domUpdates.hide(loginArea);
+
 }
 
 //event listeners//
