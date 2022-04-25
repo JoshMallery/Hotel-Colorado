@@ -41,33 +41,34 @@
         </section>
         <section class ="login-container">
           <form class ="login-data" onsubmit="return false">
-            <label>UserID:</label>
-            <input type="text" required>
+            <label for="userID" >UserID:</label>
+            <input id="userID" type="text" required>
             <br>
-            <label>Password:</label>
-            <input type="password" required>
+            <label for="password">Password:</label>
+            <input id="password" type="password" required>
             <input type="submit" id="submitLogon" value="Logon!">
           </form>
         </section>
       </section>
-      <section class="rooms-prompts-container">Please Login Above</section>
-      <section class="room-viewing-container">
-        <img src="./images/hotelPool.jpeg" alt="Picturesque view of Hotel Colorado Pool">
-      </section>
       <section class="manager-container hidden">
+        <p>Manager ToolBar:</p>
+        <form class="manager-user-view">
+          <label for="userPick">Choose a User to View</label>
+          <input name="userPick" id="mgrSelection" list="managerUserPick" placeholder="Select A User">
+        </form>
         <section class="daily-info">
           Today's Hotel Revenue is $500<br>
           Today's Occupancy is 10%
         </section>
-        <form class="manager-user-view">
-          <label for="userPick">Choose a User to View</label>
-          <input name="userPick" id="mgrSelection" list="managerUserPick">
-        </form>
         <datalist id="managerUserPick">
           <option value="null">Please Select a User</option>
           <option value ="1">Lee Anne</option>
           <option value ="2">Marko</option>
         </datalist>
+      </section>
+      <section class="rooms-prompts-container">Please Login Above</section>
+      <section class="room-viewing-container">
+        <img src="./images/hotelPool.jpeg" alt="Picturesque view of Hotel Colorado Pool">
       </section>
     </section>
   </main>

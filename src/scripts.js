@@ -1,23 +1,18 @@
 import './css/styles.css';
-import './images/turing-logo.png'
-import apiCalls from './apiCalls.js'
-import domUpdates from './domUpdates.js'
-import Customer from './classes/Customer.js'
-import Manager from './classes/Manager.js'
-import Rooms from './classes/Rooms.js'
+import './images/turing-logo.png';
+import apiCalls from './apiCalls.js';
+import domUpdates from './domUpdates.js';
+import Customer from './classes/Customer.js';
+import Manager from './classes/Manager.js';
+import Rooms from './classes/Rooms.js';
+
 // DataModel query Selectors
-//anything that will be an event listener!
-//buttons, login etc.
 
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
 const mgrDropDown = document.querySelector('#managerUserPick');
 const bookNowButton = document.querySelector('.card-button');
-//const something = document.querySelector('');
-//const mgrDeleteButton = document.querySelector('');
-
-
 
 //domQuerySelectors
 const userTextPrompts = document.querySelector('.user-text-prompts');
@@ -29,18 +24,19 @@ const mgrArea = document.querySelector('.manager-container');
 const mgrInfo = document.querySelector('.daily-info');
 const mgrCustSelect = document.querySelector('#mgrSelection');
 const calendar = document.querySelector('#calendarDate');
-//globalVariables
+
+//globalVariables/////
+
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
 
+//functions/////
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
   currentDate = computeDate();
-  //BE SURE TO DELETE THE LINE BELOW THIS!!!!
   console.log(computeDate())
-  currentDate = "2022/02/10"; //BE SURE TO DELETE THIS LINE
   domUpdates.setCalendar(calendarMin,calendar);
   console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
@@ -63,10 +59,10 @@ const computeDate = () => {
   let month = date.getMonth()+1;
   const day = date.getDate();
 
-  if(month < 10 ){
+  if(month < 10 ) {
     month = `0${month.toString()}`;
   }
-  
+
   calendarMin = `${year}-${month}-${day}`
   return `${year}/${month}/${day}`;
 }
@@ -80,38 +76,21 @@ const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
 
 const populateManager = (bookings,roomsInfo) => {
   manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
-  // const roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
-  // console.log("available rooms for today",roomsAvailableToday);
-  // const occupiedRooms = roomsData.filter(room => !roomsAvailableToday.includes(room));
   manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
-  // console.log("occupied Rooms line 76",occupiedRooms)
-  // const dailyRevenue = occupiedRooms.reduce((acc,cur) =>{
-  //   acc += cur.costPerNight
-  //   return acc
-  // },0)
-
-  // const dailyRevenue = manager.dailyRevenue(occupiedRooms); //keep this inthe manager class and pass it to the DOM
-  // console.log("daily revenue line 81",dailyRevenue);
-
   console.log("manager line 84",manager)
-
-  // const percentOccupied = rooms.percentOccupied(currentDate,bookings);
-  // const percentOccupied = manager.percentOccupied(roomsData,occupiedRooms) //keep in the manager class and pass it to the DOM
-  // console.log(percentOccupied)
-
-  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton)
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
 }
 
 const addBooking = (input) => {
-  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New'));
 }
 
 const deleteBooking = (bookingID) => {
-  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings());
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed'));
 }
 
-const refreshBookings = () => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
+const refreshBookings = (text) => {
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]});
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
@@ -154,20 +133,20 @@ const determineValidLogin = (custID,pwd) => {
 };
 
 const retrieveDataAfterLogin = (parsedID) => {
-  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => setGlobalVariables(data));
-  domUpdates.show(navArea);
-  domUpdates.hide(loginArea);
+  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => {setGlobalVariables(data);domUpdates.show(navArea);domUpdates.hide(loginArea);});
+  //MAKE THESE DOME UPDATES WITHIN THE FETCH
+  // domUpdates.show(navArea);
+  // domUpdates.hide(loginArea);
 }
 
 const retrieveManagerLogin = () => {
-  Promise.all(apiCalls.fetchManagerData()).then(data => setGlobalVariables(data));
-  domUpdates.show(navArea);
-  domUpdates.show(mgrArea);
-  domUpdates.hide(loginArea);
-
+  Promise.all(apiCalls.fetchManagerData()).then(data => {setGlobalVariables(data);domUpdates.hide(loginArea);domUpdates.show(mgrArea);});
+  // domUpdates.show(navArea);// left this out to add in later
+  // domUpdates.show(mgrArea);
+  // domUpdates.hide(loginArea);
 }
 
-//event listeners//
+//Event listeners//
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
     event.preventDefault()
@@ -178,6 +157,7 @@ searchRoomButton.addEventListener("click",(event) => {
 
 roomsDisplay.addEventListener("click", (event) => {
   let input = event.target.dataset;
+
   if(event.target.id === "newBooking"){
     addBooking(input);
   }
@@ -196,16 +176,15 @@ logonButton.addEventListener("click", (event) => {
 });
 
 goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)
+  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
 });
 
 mgrCustSelect.addEventListener("change",(event)=>{
-//loadCustomer(event.target.value)
-console.log("target+1",parseInt(event.target.value)-1)
-customer = new Customer(customersData[parseInt(event.target.value)-1]);
-populateCustomer(bookingsData,roomsData,isManager,currentDate);
-  console.log("target",event.target.value)
-  console.log(event.target.dataset.userID)
-    console.log(event.target)
-
+  console.log("target+1",parseInt(event.target.value)-1)
+  customer = new Customer(customersData[parseInt(event.target.value)-1]);
+  populateCustomer(bookingsData,roomsData,isManager,currentDate);
+  domUpdates.show(navArea);
+    console.log("target",event.target.value)
+    console.log(event.target.dataset.userID)
+      console.log(event.target)
 })
