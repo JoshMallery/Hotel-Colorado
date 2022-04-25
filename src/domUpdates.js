@@ -27,7 +27,7 @@ mgrLoadCustomerSelect(customersData,mgrDropDown) {
 
   customersData.forEach(customer => {
     mgrDropDown.innerHTML +=`
-      <option value ="${customer.id}">${customer.name}</option>
+      <option value ="${customer.name}" data-userID="${customer.id}">
       `;
   });
 },

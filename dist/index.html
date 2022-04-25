@@ -60,14 +60,15 @@
           Today's Hotel Revenue is $500<br>
           Today's Occupancy is 10%
         </section>
-        <section class="manager-user-view">
+        <form class="manager-user-view">
           <label for="userPick">Choose a User to View</label>
-          <select name="userPick" id="managerUserPick">
-            <option value="null">Please Select a User</option>
-            <option value ="1">Lee Anne</option>
-            <option value ="2">Marko</option>
-          </select>
-        </section>
+          <input name="userPick" id="mgrSelection" list="managerUserPick">
+        </form>
+        <datalist id="managerUserPick">
+          <option value="null">Please Select a User</option>
+          <option value ="1">Lee Anne</option>
+          <option value ="2">Marko</option>
+        </datalist>
       </section>
     </section>
   </main>
