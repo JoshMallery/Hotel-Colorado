@@ -40,7 +40,6 @@ const setGlobalVariables = (fetchedData) => {
   currentDate = computeDate();
   //BE SURE TO DELETE THE LINE BELOW THIS!!!!
   console.log(computeDate())
-  currentDate = "2022/02/10"; //BE SURE TO DELETE THIS LINE
   domUpdates.setCalendar(calendarMin,calendar);
   console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
@@ -66,7 +65,7 @@ const computeDate = () => {
   if(month < 10 ){
     month = `0${month.toString()}`;
   }
-  
+
   calendarMin = `${year}-${month}-${day}`
   return `${year}/${month}/${day}`;
 }
@@ -99,19 +98,19 @@ const populateManager = (bookings,roomsInfo) => {
   // const percentOccupied = manager.percentOccupied(roomsData,occupiedRooms) //keep in the manager class and pass it to the DOM
   // console.log(percentOccupied)
 
-  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton)
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
 }
 
 const addBooking = (input) => {
-  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New'));
 }
 
 const deleteBooking = (bookingID) => {
-  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings());
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed'));
 }
 
-const refreshBookings = () => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
+const refreshBookings = (text) => {
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar)});
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
@@ -196,7 +195,7 @@ logonButton.addEventListener("click", (event) => {
 });
 
 goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)
+  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
 });
 
 mgrCustSelect.addEventListener("change",(event)=>{
