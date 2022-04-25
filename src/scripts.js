@@ -12,6 +12,8 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
+const mgrDropDown = document.querySelector('#managerUserPick');
+const bookNowButton = document.querySelector('.card-button');
 //const something = document.querySelector('');
 //const mgrDeleteButton = document.querySelector('');
 
@@ -23,20 +25,41 @@ const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
 const navArea = document.querySelector('.nav-container');
 const loginArea = document.querySelector('.login-container');
-
+const mgrArea = document.querySelector('.manager-container');
+const mgrInfo = document.querySelector('.daily-info');
+const mgrCustSelect = document.querySelector('#mgrSelection');
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
+  currentDate = computeDate();
+  //BE SURE TO DELETE THE LINE BELOW THIS!!!!
+  currentDate = "2022/04/18"; //BE SURE TO DELETE THIS LINE
+
 console.log('customersdata',customersData)
-  customer = new Customer(customersData);
   rooms = new Rooms(roomsData);
 
-  populateCustomer(bookingsData,roomsData);
+  if (fetchedData[0].length === 50){
+    console.log("line 45 set globals manager triggered")
+    manager = new Manager();
+    populateManager(bookingsData,roomsData);
+  } else {
+    console.log("line 41 set globals customer triggered")
+    customer = new Customer(customersData);
+    populateCustomer(bookingsData,roomsData);
+  }
+}
+
+const computeDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  return `${year}/${month}/${day}`;
 }
 
 const populateCustomer = (bookings,roomsInfo) => {
@@ -44,6 +67,30 @@ const populateCustomer = (bookings,roomsInfo) => {
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
   domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts);
+}
+
+const populateManager = (bookings,roomsInfo) => {
+  manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
+  // const roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
+  // console.log("available rooms for today",roomsAvailableToday);
+  // const occupiedRooms = roomsData.filter(room => !roomsAvailableToday.includes(room));
+  manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
+  // console.log("occupied Rooms line 76",occupiedRooms)
+  // const dailyRevenue = occupiedRooms.reduce((acc,cur) =>{
+  //   acc += cur.costPerNight
+  //   return acc
+  // },0)
+
+  // const dailyRevenue = manager.dailyRevenue(occupiedRooms); //keep this inthe manager class and pass it to the DOM
+  // console.log("daily revenue line 81",dailyRevenue);
+
+  console.log("manager line 84",manager)
+
+  // const percentOccupied = rooms.percentOccupied(currentDate,bookings);
+  // const percentOccupied = manager.percentOccupied(roomsData,occupiedRooms) //keep in the manager class and pass it to the DOM
+  // console.log(percentOccupied)
+
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton)
 }
 
 const addBooking = (input) => {
@@ -59,6 +106,8 @@ const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   domUpdates.displaySearchResults(results,roomsDisplay,roomPrompts);
 }
 
+
+
 const transformFormDate = (date) => {
   const result = date.split("").map(num => {
     if(num === "-"){
@@ -73,13 +122,17 @@ const transformFormDate = (date) => {
 const determineValidLogin = (custID,pwd) => {
   let splitId = custID.split("customer");
 
+  if(custID === 'manager' && pwd === 'overlook2021'){
+    return retrieveManagerLogin()
+  }
+
   if(splitId.length !== 2){
-    return roomPrompts.innerHTML = "Invalid CustomerID, please check spelling and enter again";
+    return roomPrompts.innerHTML = "Invalid UserID, please check spelling and enter again";
   }
 
   let parsedId = parseInt(splitId[1]);
   if(!(parsedId >= 1  && parsedId <=50)) {
-    return roomPrompts.innerHTML ="Invalid Customer Id Number, please veriy and try again";
+    return roomPrompts.innerHTML = "Invalid UserID Number, please verify and try again";
   }
 
   if(pwd !== "overlook2021") {
@@ -93,6 +146,14 @@ const retrieveDataAfterLogin = (parsedID) => {
   Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => setGlobalVariables(data));
   domUpdates.show(navArea);
   domUpdates.hide(loginArea);
+}
+
+const retrieveManagerLogin = () => {
+  Promise.all(apiCalls.fetchManagerData()).then(data => setGlobalVariables(data));
+  domUpdates.show(navArea);
+  domUpdates.show(mgrArea);
+  domUpdates.hide(loginArea);
+
 }
 
 //event listeners//
@@ -113,10 +174,19 @@ roomsDisplay.addEventListener("click", (event) => {
 
 logonButton.addEventListener("click", (event) => {
   let input = event.target.parentNode.children
+
   determineValidLogin(input[1].value,input[4].value)
   console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
-})
+});
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts)
+});
+
+mgrCustSelect.addEventListener("change",(event)=>{
+//loadCustomer(event.target.value)
+  console.log(event.target.value)
+  console.log(event.target.dataset.userID)
+    console.log(event.target)
+
 })

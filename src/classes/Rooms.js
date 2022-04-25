@@ -4,6 +4,7 @@ class Rooms{
   }
 
   dateFilter(date,bookingInfo,custID) {
+    //custID as null for manager search?
     return this.allRooms.reduce((acc,cur) =>{
       bookingInfo.forEach(booking => {
         cur.customerID = custID;
@@ -20,6 +21,11 @@ class Rooms{
     return this.dateFilter(date,bookingInfo,customerID)
       .filter(room => (room.roomType === (type || room.roomType)) && ((room.bedSize === (bed || room.bedSize)) ));
   };
+
+  percentOccupied(currentDate,bookingInfo){
+       return ((this.allRooms.length - this.dateFilter(currentDate,bookingInfo).length) / this.allRooms.length)*100
+  };
+
 };
 
 export default Rooms

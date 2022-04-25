@@ -53,58 +53,22 @@
       </section>
       <section class="rooms-prompts-container">Please Login Above</section>
       <section class="room-viewing-container">
-        <img src="./images/hotelPool.jpeg">
-        <!-- <section class="room-card">
-          <section class = "room-details">
-            Room 1 twin bed, suite
-            <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
-          </section>
-          <section class ="room-card-buttons">
-            <button id="newBooking"class ="card-button">Book Now!</button>
-            <button id="1" class="card-button">Managerial Delete</button>
-          </section>
-        </section> -->
-        <!-- <section class="room-card">
-          <section class = "room-details">
-            Room 2 king bed, suite
-            <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
-          </section>
-          <section class ="room-card-buttons">
-            <button id="2"class ="card-button">Book Now!</button>
-            <button id="2" class="card-button">Managerial Delete</button>
-          </section>
-        </section>
-        <section class="room-card">
-          <section class = "room-details">
-            Room 3 king bed, residential
-            <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
-          </section>
-          <section class ="room-card-buttons">
-            <button id="3" class ="card-button">Book Now!</button>
-            <button id="3" class="card-button">Managerial Delete</button>
-          </section>
-        </section>
-        <section class="room-card">
-          <section class = "room-details">
-            Room 4 twin bed, single
-            <img class="room-image" src="./images/roomphoto.jpeg" alt="hotel room">
-          </section>
-          <section class ="room-card-buttons">
-            <button id="4" class ="card-button">Book Now!</button>
-            <button id="4" class="card-button">Managerial Delete</button>
-          </section>
-        </section> -->
+        <img src="./images/hotelPool.jpeg" alt="Picturesque view of Hotel Colorado Pool">
       </section>
       <section class="manager-container hidden">
-        <section class="daily-revenue">Today's Hotel Revenue is $500</section>
-        <section class="manager-user-view">
-          <label for="userPick">Choose a User to View</label>
-          <select name="userPick" id="managerUserPick">
-            <option value="null">Please Select a User</option>
-            <option value ="1">Lee Anne</option>
-            <option value ="2">Marko</option>
-          </select>
+        <section class="daily-info">
+          Today's Hotel Revenue is $500<br>
+          Today's Occupancy is 10%
         </section>
+        <form class="manager-user-view">
+          <label for="userPick">Choose a User to View</label>
+          <input name="userPick" id="mgrSelection" list="managerUserPick">
+        </form>
+        <datalist id="managerUserPick">
+          <option value="null">Please Select a User</option>
+          <option value ="1">Lee Anne</option>
+          <option value ="2">Marko</option>
+        </datalist>
       </section>
     </section>
   </main>
