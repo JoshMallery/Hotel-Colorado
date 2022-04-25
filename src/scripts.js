@@ -28,8 +28,9 @@ const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
 const mgrInfo = document.querySelector('.daily-info');
 const mgrCustSelect = document.querySelector('#mgrSelection');
+const calendar = document.querySelector('#calendarDate');
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager;
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
@@ -38,9 +39,10 @@ const setGlobalVariables = (fetchedData) => {
   bookingsData = fetchedData[2];
   currentDate = computeDate();
   //BE SURE TO DELETE THE LINE BELOW THIS!!!!
+  console.log(computeDate())
   currentDate = "2022/02/10"; //BE SURE TO DELETE THIS LINE
-
-console.log('customersdata',customersData)
+  domUpdates.setCalendar(calendarMin,calendar);
+  console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
 
   if (fetchedData[0].length === 50){
@@ -58,8 +60,14 @@ console.log('customersdata',customersData)
 const computeDate = () => {
   const date = new Date();
   const year = date.getFullYear();
-  const month = date.getMonth()+1;
+  let month = date.getMonth()+1;
   const day = date.getDate();
+
+  if(month < 10 ){
+    month = `0${month.toString()}`;
+  }
+  
+  calendarMin = `${year}-${month}-${day}`
   return `${year}/${month}/${day}`;
 }
 

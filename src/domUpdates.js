@@ -6,11 +6,18 @@ loadCustomer(customer,cardView,textPrompts,roomPrompt,isManager,currentDate){
 },
 
 show(selector) {
-selector.classList.remove('hidden')
+  selector.classList.remove('hidden')
 },
 
 hide(selector) {
-selector.classList.add('hidden')
+  selector.classList.add('hidden')
+},
+
+setCalendar(calendarMin,calendar) {
+  console.log("domupdates cal",calendar)
+  console.log("domUpdates Cal Val",calendar.value)
+  calendar.value = calendarMin
+  calendar.min = calendarMin;
 },
 
 managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,textPrompts,roomPrompt,cardView,bookNowButton) {
