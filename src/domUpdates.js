@@ -15,7 +15,7 @@ selector.classList.add('hidden')
 
 managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,textPrompts,roomPrompt,cardView,bookNowButton) {
   mgrInfo.innerHTML = `
-  Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms)}<br>
+  Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms).toFixed(2)}<br>
   Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%
   `;
 
