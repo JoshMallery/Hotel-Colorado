@@ -28,8 +28,9 @@ const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
 const mgrInfo = document.querySelector('.daily-info');
 const mgrCustSelect = document.querySelector('#mgrSelection');
+const calendar = document.querySelector('#calendarDate');
 //globalVariables
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
+let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
 
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
@@ -38,14 +39,16 @@ const setGlobalVariables = (fetchedData) => {
   bookingsData = fetchedData[2];
   currentDate = computeDate();
   //BE SURE TO DELETE THE LINE BELOW THIS!!!!
-  currentDate = "2022/04/18"; //BE SURE TO DELETE THIS LINE
-
-console.log('customersdata',customersData)
+  console.log(computeDate())
+  currentDate = "2022/02/10"; //BE SURE TO DELETE THIS LINE
+  domUpdates.setCalendar(calendarMin,calendar);
+  console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
 
   if (fetchedData[0].length === 50){
     console.log("line 45 set globals manager triggered")
     manager = new Manager();
+    isManager = true;
     populateManager(bookingsData,roomsData);
   } else {
     console.log("line 41 set globals customer triggered")
@@ -57,16 +60,22 @@ console.log('customersdata',customersData)
 const computeDate = () => {
   const date = new Date();
   const year = date.getFullYear();
-  const month = date.getMonth()+1;
+  let month = date.getMonth()+1;
   const day = date.getDate();
+
+  if(month < 10 ){
+    month = `0${month.toString()}`;
+  }
+  
+  calendarMin = `${year}-${month}-${day}`
   return `${year}/${month}/${day}`;
 }
 
-const populateCustomer = (bookings,roomsInfo) => {
+const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
   customerSpend = customer.calculateSpend(); //maybe not needed
-  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts);
+  domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts,isManager,currentDate);
 }
 
 const populateManager = (bookings,roomsInfo) => {
@@ -97,16 +106,18 @@ const addBooking = (input) => {
   Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings());
 }
 
+const deleteBooking = (bookingID) => {
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings());
+}
+
 const refreshBookings = () => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton)});
 }
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
   domUpdates.displaySearchResults(results,roomsDisplay,roomPrompts);
 }
-
-
 
 const transformFormDate = (date) => {
   const result = date.split("").map(num => {
@@ -170,6 +181,11 @@ roomsDisplay.addEventListener("click", (event) => {
   if(event.target.id === "newBooking"){
     addBooking(input);
   }
+
+  if(event.target.id === "deleteBooking"){
+    console.log(input.bookingId)
+    deleteBooking(input.bookingId);
+  }
 });
 
 logonButton.addEventListener("click", (event) => {
@@ -185,7 +201,10 @@ goToBookingsButton.addEventListener("click",() => {
 
 mgrCustSelect.addEventListener("change",(event)=>{
 //loadCustomer(event.target.value)
-  console.log(event.target.value)
+console.log("target+1",parseInt(event.target.value)-1)
+customer = new Customer(customersData[parseInt(event.target.value)-1]);
+populateCustomer(bookingsData,roomsData,isManager,currentDate);
+  console.log("target",event.target.value)
   console.log(event.target.dataset.userID)
     console.log(event.target)
 
