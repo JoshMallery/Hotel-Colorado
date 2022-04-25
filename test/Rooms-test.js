@@ -45,4 +45,8 @@ describe('Rooms', () => {
     expect(roomsClass.roomSearchFilter(date,bookings)).to.deep.equal([rooms[0],rooms[1],rooms[2],rooms[4]]);
   });
 
+  it('should return total occupancy for a date', () => {
+    expect(roomsClass.percentOccupied(date,bookings)).to.be.equal(20);
+  });
+
 });
