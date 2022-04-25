@@ -12,6 +12,7 @@ import Rooms from './classes/Rooms.js'
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
+const mgrDropDown = document.querySelector('#managerUserPick')
 //const something = document.querySelector('');
 //const mgrDeleteButton = document.querySelector('');
 
@@ -24,6 +25,7 @@ const roomsDisplay = document.querySelector('.room-viewing-container');
 const navArea = document.querySelector('.nav-container');
 const loginArea = document.querySelector('.login-container');
 const mgrArea = document.querySelector('.manager-container');
+const mgrInfo = document.querySelector('.daily-info');
 
 //globalVariables
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager
@@ -33,15 +35,21 @@ const setGlobalVariables = (fetchedData) => {
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
-  currentDate = computeDate()
+  currentDate = computeDate();
+  //BE SURE TO DELETE THE LINE BELOW THIS!!!!
+  currentDate = "2022/04/18"; //BE SURE TO DELETE THIS LINE
+
 console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
-  if (fetchedData[0].length === 1){
-      customer = new Customer(customersData);
-      populateCustomer(bookingsData,roomsData);
+
+  if (fetchedData[0].length === 50){
+    console.log("line 45 set globals manager triggered")
+    manager = new Manager();
+    populateManager(bookingsData,roomsData);
   } else {
-      manager = new Customer({id:0,name:'Hotel Manager'}); //might not need this line
-      populateManager(bookingsData,roomsData);
+    console.log("line 41 set globals customer triggered")
+    customer = new Customer(customersData);
+    populateCustomer(bookingsData,roomsData);
   }
 }
 
@@ -61,13 +69,27 @@ const populateCustomer = (bookings,roomsInfo) => {
 }
 
 const populateManager = (bookings,roomsInfo) => {
-  //show rooms available for todays date  use the datefilter
-  const roomsToday = rooms.dateFilter(currentDate,bookings);
-  //shoe revenue for todays date// use the customer class for this
-  const revenueToday = rooms.revenueToday(currentDate,roomsToday);
-  //percentage of rooms occupied //use the rooms class for this.
-  const percentOccupied = rooms.percentOccupied(currentDate,bookings);
-  domUpdates.managerViews(roomsToday,revenueToday,percentOccupied)
+  manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
+  // const roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
+  // console.log("available rooms for today",roomsAvailableToday);
+  // const occupiedRooms = roomsData.filter(room => !roomsAvailableToday.includes(room));
+  manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
+  // console.log("occupied Rooms line 76",occupiedRooms)
+  // const dailyRevenue = occupiedRooms.reduce((acc,cur) =>{
+  //   acc += cur.costPerNight
+  //   return acc
+  // },0)
+
+  // const dailyRevenue = manager.dailyRevenue(occupiedRooms); //keep this inthe manager class and pass it to the DOM
+  // console.log("daily revenue line 81",dailyRevenue);
+
+  console.log("manager line 84",manager)
+
+  // const percentOccupied = rooms.percentOccupied(currentDate,bookings);
+  // const percentOccupied = manager.percentOccupied(roomsData,occupiedRooms) //keep in the manager class and pass it to the DOM
+  // console.log(percentOccupied)
+
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown)
 }
 
 const addBooking = (input) => {

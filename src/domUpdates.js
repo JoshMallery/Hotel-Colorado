@@ -13,18 +13,37 @@ hide(selector) {
 selector.classList.add('hidden')
 },
 
+managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown) {
+  mgrInfo.innerHTML = `
+  Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms)}<br>
+  Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%
+  `;
+
+  this.mgrLoadCustomerSelect(customersData,mgrDropDown);
+},
+
+mgrLoadCustomerSelect(customersData,mgrDropDown) {
+ mgrDropDown.innerHTML=`<option value="null">Please Select a User</option>`;
+
+  customersData.forEach(customer => {
+    mgrDropDown.innerHTML +=`
+      <option value ="${customer.id}">${customer.name}</option>
+      `;
+  });
+},
+
 greetCustomer(customerName,totalSpend,prompts) {
   prompts.innerText = `Hello! and Welcome back ${customerName}, your total spend at the Hotel is:     $${totalSpend}`
 },
 
-displayBookings(bookings,cardView,roomPrompt) {
+displayBookings(bookings,cardView,roomPrompt,isManager,managerBtnElement) {
   console.log(bookings)
     cardView.innerHTML = "";
     cardView.innerHTML = this.populateBookingCards(bookings) || "No past or future bookings found, be sure to book a stay!";
     roomPrompt.innerHTML = `You have made ${bookings.length} bookings with Hotel Colorado.`;
     //MANAGER SHOW BUTTON LOGIC?
-    //if manager {
-    //this.show(mgrbutton)
+    //if (isManager) {
+    //this.show(managerBtnElement)
   //}
 },
 
