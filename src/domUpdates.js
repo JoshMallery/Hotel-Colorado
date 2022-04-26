@@ -22,8 +22,6 @@ updateError(roomPrompts,text) {
 },
 
 setCalendar(calendarMin,calendar) {
-  console.log("domupdates cal",calendar);
-  console.log("domUpdates Cal Val",calendar.value);
   calendar.value = calendarMin;
   calendar.min = calendarMin;
 },
@@ -61,7 +59,6 @@ greetCustomer(customerName,totalSpend,prompts) {
 },
 
 displayBookings(bookings,cardView,roomPrompt,isManager,currentDate) {
-  console.log(bookings)
   cardView.innerHTML = "";
   cardView.innerHTML = this.populateBookingCards(bookings,roomPrompt,isManager,currentDate) || "No past or future bookings found, be sure to book a stay!";
 },
@@ -73,13 +70,11 @@ displayBookingConfirm(roomPrompt,searchForm,text,calendarMin,calendar) {
 },
 
 displaySearchResults(results,cardView,roomPrompt) {
-  console.log("results from a search!!", results)
   cardView.innerHTML = "";
   cardView.innerHTML = this.populateSearchCards(results,roomPrompt) || this.noSearchResults(cardView,roomPrompt)
 },
 
 noSearchResults(cardView,roomsMessage){
-  console.log(cardView)
   roomsMessage.innerHTML = "No Rooms have availability that date."
   return cardView.innerHTML = "SORRY no rooms available that date, please adjust your parameters and search again!"
 },
@@ -113,7 +108,6 @@ populateSearchCards(displayData,roomPrompt,isManager) {
 },
 
 populateBookingCards(displayData,roomPrompt,isManager,currentDate) {
-console.log(displayData)
   let cardData= "";
 
   displayData
