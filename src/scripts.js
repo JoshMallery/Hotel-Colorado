@@ -82,7 +82,7 @@ const computeDate = () => {
     month = `0${month.toString()}`;
   }
 
-  calendarMin = `${year}-${month}-${day}`
+  calendarMin = `${year}-${month}-${day}`;
   return `${year}/${month}/${day}`;
 }
 
@@ -120,7 +120,7 @@ const determineValidLogin = (custID,pwd) => {
   let splitId = custID.split("customer");
 
   if(custID === 'manager' && pwd === 'overlook2021'){
-    return retrieveManagerLogin()
+    return retrieveManagerLogin();
   }
 
   if(splitId.length !== 2){
@@ -140,11 +140,25 @@ const determineValidLogin = (custID,pwd) => {
 };
 
 //Event Listeners/////
+logonButton.addEventListener("click", (event) => {
+  let input = event.target.parentNode.children;
+  determineValidLogin(input[1].value,input[4].value)
+  console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
+});
+
+logoffButton.addEventListener("click", (event) => {
+  document.location.reload(true);
+});
+
+goToBookingsButton.addEventListener("click",() => {
+  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
+});
+
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
-    event.preventDefault()
-  const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
-  searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
+    event.preventDefault();
+    const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
+    searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
   };
 });
 
@@ -159,21 +173,6 @@ roomsDisplay.addEventListener("click", (event) => {
     console.log(input.bookingId)
     deleteBooking(input.bookingId);
   };
-});
-
-logonButton.addEventListener("click", (event) => {
-  let input = event.target.parentNode.children
-
-  determineValidLogin(input[1].value,input[4].value)
-  console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
-});
-
-logoffButton.addEventListener("click", (event) => {
-  document.location.reload(true);
-});
-
-goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
 });
 
 mgrCustSelect.addEventListener("change",(event)=>{
