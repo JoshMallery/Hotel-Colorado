@@ -5,15 +5,15 @@ import Customer from './classes/Customer.js';
 import Manager from './classes/Manager.js';
 import Rooms from './classes/Rooms.js';
 
-//DataModel query Selectors
+//DataModelQuerySelectors/////
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
-const logonButton = document.querySelector('#submitLogon');
-const logoffButton = document.querySelector('.logout-button');
 const mgrDropDown = document.querySelector('#managerUserPick');
 const bookNowButton = document.querySelector('.card-button');
 
-//DOMQuerySelectors
+//DOMQuerySelectors/////
+const logonButton = document.querySelector('#submitLogon');
+const logoffButton = document.querySelector('.logout-button');
 const userTextPrompts = document.querySelector('.user-text-prompts');
 const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
@@ -25,7 +25,7 @@ const mgrCustSelect = document.querySelector('#mgrSelection');
 const calendar = document.querySelector('#calendarDate');
 
 //GlobalVariables/////
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
+let bookingsData, roomsData, customersData, customer, rooms, customerSpend, bookButton, currentDate, manager, isManager, calendarMin;
 
 //Fetch Data/////
 const retrieveDataAfterLogin = (parsedID) => {
@@ -50,23 +50,18 @@ const refreshBookings = (text) => {
 
 //Functions//////
 const setGlobalVariables = (fetchedData) => {
-  console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
   currentDate = computeDate();
-  console.log(computeDate())
   domUpdates.setCalendar(calendarMin,calendar);
-  console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
 
   if (fetchedData[0].length === 50){
-    console.log("line 45 set globals manager triggered")
     manager = new Manager();
     isManager = true;
     populateManager(bookingsData,roomsData);
   } else {
-    console.log("line 41 set globals customer triggered")
     customer = new Customer(customersData);
     populateCustomer(bookingsData,roomsData);
   }
@@ -82,7 +77,7 @@ const computeDate = () => {
     month = `0${month.toString()}`;
   }
 
-  calendarMin = `${year}-${month}-${day}`
+  calendarMin = `${year}-${month}-${day}`;
   return `${year}/${month}/${day}`;
 }
 
@@ -95,7 +90,6 @@ const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
 const populateManager = (bookings,roomsInfo) => {
   manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
   manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
-  console.log("manager line 84",manager)
   domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
 }
 
@@ -120,7 +114,7 @@ const determineValidLogin = (custID,pwd) => {
   let splitId = custID.split("customer");
 
   if(custID === 'manager' && pwd === 'overlook2021'){
-    return retrieveManagerLogin()
+    return retrieveManagerLogin();
   }
 
   if(splitId.length !== 2){
@@ -139,12 +133,25 @@ const determineValidLogin = (custID,pwd) => {
    retrieveDataAfterLogin(parsedId);
 };
 
-//Event Listeners//
+//Event Listeners/////
+logonButton.addEventListener("click", (event) => {
+  let input = event.target.parentNode.children;
+  determineValidLogin(input[1].value,input[4].value)
+});
+
+logoffButton.addEventListener("click", (event) => {
+  document.location.reload(true);
+});
+
+goToBookingsButton.addEventListener("click",() => {
+  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
+});
+
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
-    event.preventDefault()
-  const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
-  searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
+    event.preventDefault();
+    const formattedDate = transformFormDate(event.target.parentNode.children[1].value);
+    searchRooms(formattedDate,bookingsData,event.target.parentNode.children[3].value,event.target.parentNode.children[5].value,customer.id)
   };
 });
 
@@ -156,32 +163,12 @@ roomsDisplay.addEventListener("click", (event) => {
   };
 
   if(event.target.id === "deleteBooking"){
-    console.log(input.bookingId)
     deleteBooking(input.bookingId);
   };
 });
 
-logonButton.addEventListener("click", (event) => {
-  let input = event.target.parentNode.children
-
-  determineValidLogin(input[1].value,input[4].value)
-  console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
-});
-
-logoffButton.addEventListener("click", (event) => {
-  document.location.reload(true);
-});
-
-goToBookingsButton.addEventListener("click",() => {
-  domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
-});
-
 mgrCustSelect.addEventListener("change",(event)=>{
-  console.log("target+1",parseInt(event.target.value)-1)
   customer = new Customer(customersData[parseInt(event.target.value)-1]);
   populateCustomer(bookingsData,roomsData,isManager,currentDate);
   domUpdates.show(navArea);
-    console.log("target",event.target.value)
-    console.log(event.target.dataset.userID)
-      console.log(event.target)
 });
