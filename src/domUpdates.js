@@ -13,19 +13,23 @@ hide(selector) {
   selector.classList.add('hidden');
 },
 
+fetchError(roomPrompts) {
+  roomPrompts.innerHTML = "Server Down, Please Try Again Later."
+},
+
+updateError(roomPrompts,text) {
+  roomPrompts.innerHTML = `Error, You booking was not ${text}. Please Try Again Later.`
+},
+
 setCalendar(calendarMin,calendar) {
   console.log("domupdates cal",calendar);
   console.log("domUpdates Cal Val",calendar.value);
-  calendar.value = calendarMin
+  calendar.value = calendarMin;
   calendar.min = calendarMin;
 },
 
 managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,textPrompts,roomPrompt,cardView,bookNowButton,isManager) {
   this.managerToolbarText(manager,mgrInfo,roomsData)
-// mgrInfo.innerHTML = `
-//   Today's Hotel Revenue is $${manager.dailyRevenue(manager.occupiedRooms).toFixed(2)}<br>
-//   Today's Occupancy is ${manager.percentOccupied(roomsData,manager.occupiedRooms)}%`;
-
   textPrompts.innerText = `Hello Manager, today's date is ${currentDate}.`
   this.mgrLoadCustomerSelect(customersData,mgrDropDown);
   this.mgrRoomsAvailableToday(manager,roomPrompt,cardView,isManager);
@@ -38,8 +42,8 @@ managerToolbarText (manager,mgrInfo,roomsData) {
 },
 
 mgrRoomsAvailableToday(manager,roomPrompt,cardView,isManager) {
-cardView.innerHTML = this.populateSearchCards(manager.roomsAvailableToday,roomPrompt,isManager);
-roomPrompt.innerHTML = "Today's Available Rooms are below --- To View, Search, and Edit a Users Rooms Use the Manager Toolbar Above";
+  cardView.innerHTML = this.populateSearchCards(manager.roomsAvailableToday,roomPrompt,isManager);
+  roomPrompt.innerHTML = "Today's Available Rooms are below --- To View, Search, and Edit a Users Rooms Use the Manager Toolbar Above";
 },
 
 mgrLoadCustomerSelect(customersData,mgrDropDown) {
@@ -58,14 +62,14 @@ greetCustomer(customerName,totalSpend,prompts) {
 
 displayBookings(bookings,cardView,roomPrompt,isManager,currentDate) {
   console.log(bookings)
-    cardView.innerHTML = "";
-    cardView.innerHTML = this.populateBookingCards(bookings,roomPrompt,isManager,currentDate) || "No past or future bookings found, be sure to book a stay!";
+  cardView.innerHTML = "";
+  cardView.innerHTML = this.populateBookingCards(bookings,roomPrompt,isManager,currentDate) || "No past or future bookings found, be sure to book a stay!";
 },
 
 displayBookingConfirm(roomPrompt,searchForm,text,calendarMin,calendar) {
-roomPrompt.innerHTML = `Your ${text} Booking is Confirmed!`;
-searchForm.reset();
-this.setCalendar(calendarMin,calendar)
+  roomPrompt.innerHTML = `Your ${text} Booking is Confirmed!`;
+  searchForm.reset();
+  this.setCalendar(calendarMin,calendar);
 },
 
 displaySearchResults(results,cardView,roomPrompt) {
