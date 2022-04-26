@@ -4,7 +4,6 @@ class Rooms{
   }
 
   dateFilter(date,bookingInfo,custID) {
-    //custID as null for manager search?
     return this.allRooms.reduce((acc,cur) =>{
       bookingInfo.forEach(booking => {
         cur.customerID = custID;

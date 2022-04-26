@@ -5,11 +5,11 @@ class Manager {
   };
 
   dailyRevenue(occupiedRooms) {
-      return occupiedRooms
-              .reduce((acc,cur) =>{
-                acc += cur.costPerNight
-                return acc
-              },0);
+    return occupiedRooms
+          .reduce((acc,cur) =>{
+            acc += cur.costPerNight
+            return acc
+          },0);
   };
 
 };
