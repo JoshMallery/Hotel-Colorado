@@ -6,7 +6,7 @@
 
 Have you ever found yourself wondering what to make for dinner? This simple application displays a recipe tracking / meal planning application that allows users to view their favorite recipes and plan shopping trips around them. Users can view a list of recipes, favorite their own recipes, and choose recipes to cook. Our application, "Fork to Table" is a collaborative version of What's Cookin.
 
-![Fork to Table](https://media.giphy.com/media/sVVBijlV7Wo5BFAYBp/giphy.gif)
+![Hotel Colorado](https://media.giphy.com/media/sVVBijlV7Wo5BFAYBp/giphy.gif)
 
 ## Accessibility
 
@@ -43,10 +43,10 @@ Our group is proud to have a LightHouse score of 100% and to have gained a new p
 - CSS
 - HTML
 - Webpack
-- Fetch API
+- Web APIs
 - Mocha
 - Chai
-- GET and POST requests
+- GET,POST, DELETE requests
 
 ## Future Features
 
@@ -60,9 +60,7 @@ Our group is proud to have a LightHouse score of 100% and to have gained a new p
 
 ## Contributors
 
-- [Igor Decess](https://github.com/userigorgithub)
 - [Josh Mallery](https://github.com/JoshMallery)
-- [Jordan Sullivan](https://github.com/jordan-sullivan)
 
 ## Image Credit
 

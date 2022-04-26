@@ -45,7 +45,7 @@ const deleteBooking = (bookingID) => {
 };
 
 const refreshBookings = (text) => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]}).catch(error => domUpdates.fetchError(roomPrompts));
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => { populateManager(data[0],roomsData); populateCustomer(data[0],roomsData,isManager,currentDate);   domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0];}).catch(error => domUpdates.fetchError(roomPrompts,error));
 };
 
 //Functions//////
@@ -88,9 +88,13 @@ const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
 }
 
 const populateManager = (bookings,roomsInfo) => {
+  if(!isManager) {
+    return
+  };
   manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
   manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
-  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
+  domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager);
+  domUpdates.managerToolbarText(manager,mgrInfo,roomsData);
 }
 
 

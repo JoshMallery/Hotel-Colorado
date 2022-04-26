@@ -13,7 +13,7 @@ hide(selector) {
   selector.classList.add('hidden');
 },
 
-fetchError(roomPrompts) {
+fetchError(roomPrompts,error) {
   roomPrompts.innerHTML = "Server Down, Please Try Again Later."
 },
 
