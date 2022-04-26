@@ -50,23 +50,18 @@ const refreshBookings = (text) => {
 
 //Functions//////
 const setGlobalVariables = (fetchedData) => {
-  console.log(fetchedData)
   customersData = fetchedData[0];
   roomsData = fetchedData[1];
   bookingsData = fetchedData[2];
   currentDate = computeDate();
-  console.log(computeDate())
   domUpdates.setCalendar(calendarMin,calendar);
-  console.log('customersdata',customersData)
   rooms = new Rooms(roomsData);
 
   if (fetchedData[0].length === 50){
-    console.log("line 45 set globals manager triggered")
     manager = new Manager();
     isManager = true;
     populateManager(bookingsData,roomsData);
   } else {
-    console.log("line 41 set globals customer triggered")
     customer = new Customer(customersData);
     populateCustomer(bookingsData,roomsData);
   }
@@ -95,7 +90,6 @@ const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
 const populateManager = (bookings,roomsInfo) => {
   manager.roomsAvailableToday = rooms.dateFilter(currentDate,bookings);
   manager.occupiedRooms = roomsData.filter(room => !manager.roomsAvailableToday.includes(room));
-  console.log("manager line 84",manager)
   domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
 }
 
@@ -143,7 +137,6 @@ const determineValidLogin = (custID,pwd) => {
 logonButton.addEventListener("click", (event) => {
   let input = event.target.parentNode.children;
   determineValidLogin(input[1].value,input[4].value)
-  console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
 });
 
 logoffButton.addEventListener("click", (event) => {
@@ -170,17 +163,12 @@ roomsDisplay.addEventListener("click", (event) => {
   };
 
   if(event.target.id === "deleteBooking"){
-    console.log(input.bookingId)
     deleteBooking(input.bookingId);
   };
 });
 
 mgrCustSelect.addEventListener("change",(event)=>{
-  console.log("target+1",parseInt(event.target.value)-1)
   customer = new Customer(customersData[parseInt(event.target.value)-1]);
   populateCustomer(bookingsData,roomsData,isManager,currentDate);
   domUpdates.show(navArea);
-    console.log("target",event.target.value)
-    console.log(event.target.dataset.userID)
-      console.log(event.target)
 });
