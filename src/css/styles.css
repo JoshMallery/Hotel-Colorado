@@ -25,7 +25,10 @@ main {
 }
 
 p {
-  font-size: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align:top;
+  font-size: 25px;
 }
 
 .nav-container {
@@ -149,6 +152,8 @@ p {
 }
 
 .manager-user-view {
+  align-items: center;
+  display: flex;
   height: 60%;
   width: 30%;
 }

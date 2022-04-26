@@ -16,7 +16,7 @@
       <button class="nav-displays" id="yourBookings">Your Bookings</button>
       <form class="nav-search" onsubmit="return false">
         <label for ="calendarDate"> Search For Availability by Date:</label>
-        <input class="nav-displays" type="date" id="calendarDate" value= "2022-04-22" min="2022-04-20" required>
+        <input class="nav-displays" type="date" id="calendarDate" required>
         <label for="roomType">Pick a Room Type for Your Stay:</label>
         <select class="nav-displays" name="roomType" id="roomType">
           <option value="">Please Pick a Room Type</option>
@@ -59,15 +59,8 @@
           <label for="userPick">Choose a User to View</label>
           <input name="userPick" id="mgrSelection" list="managerUserPick" placeholder="Select A User">
         </form>
-        <section class="daily-info">
-          Today's Hotel Revenue is $500<br>
-          Today's Occupancy is 10%
-        </section>
-        <datalist id="managerUserPick">
-          <option value="null">Please Select a User</option>
-          <option value ="1">Lee Anne</option>
-          <option value ="2">Marko</option>
-        </datalist>
+        <section class="daily-info"></section>
+        <datalist id="managerUserPick"></datalist>
       </section>
       <section class="rooms-prompts-container">Please Login Above</section>
       <section class="room-viewing-container">
