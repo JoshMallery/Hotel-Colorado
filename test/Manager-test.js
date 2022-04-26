@@ -23,12 +23,6 @@ describe('Manager', () => {
     expect(manager).to.be.an.instanceOf(Manager);
   });
 
-  // it('should determine Occcupied rooms', () => {
-  //   console.log(allRooms);
-  //   console.log(availableRooms);
-  //   expect(manager.findOccupiedRooms(allRooms,availableRooms)).to.deep.equal(75);
-  // });
-
   it('should calculate percent of occupied Rooms', () => {
     expect(manager.percentOccupied(allRooms,occupiedRooms)).to.deep.equal(20);
   });

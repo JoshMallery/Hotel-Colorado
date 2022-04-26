@@ -5,7 +5,7 @@ import roomsData from './sampleData/rooms-sample.js';
 import Customer from '../src/classes/Customer.js';
 
 describe('Customer', () => {
-  let bookings, customer1, customer2, customer3, rooms, customerClass;
+  let bookings, customer1, customer2, customer3, rooms;
 
   beforeEach(() => {
     customer1 = new Customer(customersData.customers[0]);
