@@ -13,6 +13,14 @@ hide(selector) {
   selector.classList.add('hidden');
 },
 
+fetchError(roomPrompts) {
+  roomPrompts.innerHTML = "Server Down, Please Try Again Later."
+},
+
+updateError(roomPrompts,text) {
+  roomPrompts.innerHTML = `Error, You booking was not ${text}. Please Try Again Later.`
+},
+
 setCalendar(calendarMin,calendar) {
   console.log("domupdates cal",calendar);
   console.log("domUpdates Cal Val",calendar.value);

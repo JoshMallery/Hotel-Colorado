@@ -24,31 +24,31 @@ const mgrInfo = document.querySelector('.daily-info');
 const mgrCustSelect = document.querySelector('#mgrSelection');
 const calendar = document.querySelector('#calendarDate');
 
-//globalVariables/////
+//GlobalVariables/////
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
 
-//Fetch Data
+//Fetch Data/////
 const retrieveDataAfterLogin = (parsedID) => {
-  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => {setGlobalVariables(data);domUpdates.show(navArea);domUpdates.hide(loginArea);domUpdates.show(logoffButton);});
+  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => {setGlobalVariables(data);domUpdates.show(navArea);domUpdates.hide(loginArea);domUpdates.show(logoffButton);}).catch(error => domUpdates.fetchError(roomPrompts));
 };
 
 const retrieveManagerLogin = () => {
-  Promise.all(apiCalls.fetchManagerData()).then(data => {setGlobalVariables(data);domUpdates.hide(loginArea);domUpdates.show(mgrArea);domUpdates.show(logoffButton);});
+  Promise.all(apiCalls.fetchManagerData()).then(data => {setGlobalVariables(data);domUpdates.hide(loginArea);domUpdates.show(mgrArea);domUpdates.show(logoffButton);}).catch(error => domUpdates.fetchError(roomPrompts));
 };
 
 const addBooking = (input) => {
-  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New'));
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New')).catch(error => domUpdates.updateError(roomPrompts,"Added"));
 };
 
 const deleteBooking = (bookingID) => {
-  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed'));
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed')).catch(error => domUpdates.updateError(roomPrompts,"Deleted"));
 };
 
 const refreshBookings = (text) => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]});
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]}).catch(error => domUpdates.fetchError(roomPrompts));
 };
 
-//Functions/////
+//Functions//////
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
   customersData = fetchedData[0];
