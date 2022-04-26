@@ -53,7 +53,6 @@ p {
   height: 70%;
   justify-content: space-around;
   width: 100%;
-  /* border: 2px solid black; */
 }
 
 .content-container {
@@ -80,12 +79,12 @@ p {
   width: 50%;
 }
 
-.login-container {
+.login-container,.logout-container {
   align-items: center;
   display:flex;
   height: 100%;
   justify-content: center;
-  width: 40%;
+  width: 35%;
 }
 
 .rooms-prompts-container{
@@ -106,7 +105,6 @@ p {
   justify-content:space-around;
   overflow-y: scroll;
   width: 100%;
-  /* border: 2px solid black; */
 }
 
 .room-card {

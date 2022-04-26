@@ -1,22 +1,19 @@
 import './css/styles.css';
-// import './images/turing-logo.png';
-// import './images/hotelbackground.png';
-// import './images/landscapebackground.png';
 import apiCalls from './apiCalls.js';
 import domUpdates from './domUpdates.js';
 import Customer from './classes/Customer.js';
 import Manager from './classes/Manager.js';
 import Rooms from './classes/Rooms.js';
 
-// DataModel query Selectors
-
+//DataModel query Selectors
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
 const logonButton = document.querySelector('#submitLogon');
+const logoffButton = document.querySelector('.logout-button');
 const mgrDropDown = document.querySelector('#managerUserPick');
 const bookNowButton = document.querySelector('.card-button');
 
-//domQuerySelectors
+//DOMQuerySelectors
 const userTextPrompts = document.querySelector('.user-text-prompts');
 const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
@@ -28,10 +25,30 @@ const mgrCustSelect = document.querySelector('#mgrSelection');
 const calendar = document.querySelector('#calendarDate');
 
 //globalVariables/////
-
 let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
 
-//functions/////
+//Fetch Data
+const addBooking = (input) => {
+  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New'));
+};
+
+const deleteBooking = (bookingID) => {
+  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed'));
+};
+
+const refreshBookings = (text) => {
+  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]});
+};
+
+const retrieveDataAfterLogin = (parsedID) => {
+  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => {setGlobalVariables(data);domUpdates.show(navArea);domUpdates.hide(loginArea);domUpdates.show(logoffButton);});
+};
+
+const retrieveManagerLogin = () => {
+  Promise.all(apiCalls.fetchManagerData()).then(data => {setGlobalVariables(data);domUpdates.hide(loginArea);domUpdates.show(mgrArea);domUpdates.show(logoffButton);});
+};
+
+//Functions/////
 const setGlobalVariables = (fetchedData) => {
   console.log(fetchedData)
   customersData = fetchedData[0];
@@ -72,7 +89,6 @@ const computeDate = () => {
 const populateCustomer = (bookings,roomsInfo,isManager,currentDate) => {
   customer.loadExistingBookings(bookings);
   customer.addCostPerNight(roomsInfo);
-  customerSpend = customer.calculateSpend(); //maybe not needed
   domUpdates.loadCustomer(customer,roomsDisplay,userTextPrompts,roomPrompts,isManager,currentDate);
 }
 
@@ -83,17 +99,6 @@ const populateManager = (bookings,roomsInfo) => {
   domUpdates.managerViews(manager,mgrInfo,currentDate,bookings,roomsData,customersData,mgrDropDown,userTextPrompts,roomPrompts,roomsDisplay,bookNowButton,isManager)
 }
 
-const addBooking = (input) => {
-  Promise.all([apiCalls.postBooking(parseInt(input.user),input.date,parseInt(input.room))]).then(data => refreshBookings('New'));
-}
-
-const deleteBooking = (bookingID) => {
-  Promise.all([apiCalls.removeBooking(bookingID)]).then(data => refreshBookings('Removed'));
-}
-
-const refreshBookings = (text) => {
-  Promise.all([apiCalls.fetchOne('bookings')]).then(data => {populateCustomer(data[0],roomsData,isManager,currentDate); populateManager(data[0],roomsData); domUpdates.managerToolbarText(manager,mgrInfo,roomsData); domUpdates.displayBookingConfirm(roomPrompts,searchRoomButton,text,calendarMin,calendar); bookingsData = data[0]});
-}
 
 const searchRooms = (date,bookingInfo,type,bed,customerID) => {
   const results = rooms.roomSearchFilter(date,bookingInfo,type,bed,customerID);
@@ -134,21 +139,7 @@ const determineValidLogin = (custID,pwd) => {
    retrieveDataAfterLogin(parsedId);
 };
 
-const retrieveDataAfterLogin = (parsedID) => {
-  Promise.all(apiCalls.fetchOneCustomerData(parsedID)).then(data => {setGlobalVariables(data);domUpdates.show(navArea);domUpdates.hide(loginArea);});
-  //MAKE THESE DOME UPDATES WITHIN THE FETCH
-  // domUpdates.show(navArea);
-  // domUpdates.hide(loginArea);
-}
-
-const retrieveManagerLogin = () => {
-  Promise.all(apiCalls.fetchManagerData()).then(data => {setGlobalVariables(data);domUpdates.hide(loginArea);domUpdates.show(mgrArea);});
-  // domUpdates.show(navArea);// left this out to add in later
-  // domUpdates.show(mgrArea);
-  // domUpdates.hide(loginArea);
-}
-
-//Event listeners//
+//Event Listeners//
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
     event.preventDefault()
@@ -162,12 +153,12 @@ roomsDisplay.addEventListener("click", (event) => {
 
   if(event.target.id === "newBooking"){
     addBooking(input);
-  }
+  };
 
   if(event.target.id === "deleteBooking"){
     console.log(input.bookingId)
     deleteBooking(input.bookingId);
-  }
+  };
 });
 
 logonButton.addEventListener("click", (event) => {
@@ -176,6 +167,11 @@ logonButton.addEventListener("click", (event) => {
   determineValidLogin(input[1].value,input[4].value)
   console.log("you click logon!",event.target.parentNode.children[1].value,event.target.parentNode.children[4].value)
 });
+
+logoffButton.addEventListener("click", (event) => {
+  document.location.reload(true);
+});
+
 
 goToBookingsButton.addEventListener("click",() => {
   domUpdates.displayBookings(customer.bookings,roomsDisplay,roomPrompts,isManager,currentDate)
@@ -189,4 +185,4 @@ mgrCustSelect.addEventListener("change",(event)=>{
     console.log("target",event.target.value)
     console.log(event.target.dataset.userID)
       console.log(event.target)
-})
+});
