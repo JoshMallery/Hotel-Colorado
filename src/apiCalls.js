@@ -13,7 +13,7 @@ fetchCustomer(param) {
       .catch((error) => console.log(error));
   },
 
-fetchOneCustomerData(custID = "") {
+fetchOneCustomerData(custID) {
     return[this.fetchCustomer(custID),this.fetchOne("rooms"), this.fetchOne("bookings")];
   },
 
