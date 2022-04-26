@@ -5,15 +5,15 @@ import Customer from './classes/Customer.js';
 import Manager from './classes/Manager.js';
 import Rooms from './classes/Rooms.js';
 
-//DataModel query Selectors
+//DataModelQuerySelectors/////
 const searchRoomButton = document.querySelector('.nav-search');
 const goToBookingsButton = document.querySelector('.nav-displays');
-const logonButton = document.querySelector('#submitLogon');
-const logoffButton = document.querySelector('.logout-button');
 const mgrDropDown = document.querySelector('#managerUserPick');
 const bookNowButton = document.querySelector('.card-button');
 
-//DOMQuerySelectors
+//DOMQuerySelectors/////
+const logonButton = document.querySelector('#submitLogon');
+const logoffButton = document.querySelector('.logout-button');
 const userTextPrompts = document.querySelector('.user-text-prompts');
 const roomPrompts = document.querySelector('.rooms-prompts-container');
 const roomsDisplay = document.querySelector('.room-viewing-container');
@@ -25,7 +25,7 @@ const mgrCustSelect = document.querySelector('#mgrSelection');
 const calendar = document.querySelector('#calendarDate');
 
 //GlobalVariables/////
-let bookingsData,roomsData,customersData,customer,rooms, customerSpend, bookButton, currentDate, manager, isManager,calendarMin;
+let bookingsData, roomsData, customersData, customer, rooms, customerSpend, bookButton, currentDate, manager, isManager, calendarMin;
 
 //Fetch Data/////
 const retrieveDataAfterLogin = (parsedID) => {
@@ -139,7 +139,7 @@ const determineValidLogin = (custID,pwd) => {
    retrieveDataAfterLogin(parsedId);
 };
 
-//Event Listeners//
+//Event Listeners/////
 searchRoomButton.addEventListener("click",(event) => {
   if(event.target.id === "availabilitySearch" && event.target.parentNode.children[1].value !== ''){
     event.preventDefault()
