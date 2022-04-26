@@ -16,7 +16,7 @@ hide(selector) {
 setCalendar(calendarMin,calendar) {
   console.log("domupdates cal",calendar);
   console.log("domUpdates Cal Val",calendar.value);
-  calendar.value = calendarMin
+  calendar.value = calendarMin;
   calendar.min = calendarMin;
 },
 
@@ -65,7 +65,7 @@ displayBookings(bookings,cardView,roomPrompt,isManager,currentDate) {
 displayBookingConfirm(roomPrompt,searchForm,text,calendarMin,calendar) {
 roomPrompt.innerHTML = `Your ${text} Booking is Confirmed!`;
 searchForm.reset();
-this.setCalendar(calendarMin,calendar)
+this.setCalendar(calendarMin,calendar);
 },
 
 displaySearchResults(results,cardView,roomPrompt) {

@@ -1,5 +1,7 @@
 import './css/styles.css';
-import './images/turing-logo.png';
+// import './images/turing-logo.png';
+// import './images/hotelbackground.png';
+// import './images/landscapebackground.png';
 import apiCalls from './apiCalls.js';
 import domUpdates from './domUpdates.js';
 import Customer from './classes/Customer.js';
