@@ -6,7 +6,7 @@
 
 This is a hotel booking application! It demonstrates use of Fetch Requests, Object Oriented Programming and UI/UX including accessibility.
 
-![Hotel Colorado]()
+![Hotel Colorado](https://user-images.githubusercontent.com/96563007/165417333-66c63140-2558-443e-896f-792eff935514.gif)
 
 ## Local Set-Up Instructions
 
