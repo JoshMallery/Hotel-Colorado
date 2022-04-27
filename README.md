@@ -51,7 +51,7 @@ This is a hotel booking application! It demonstrates use of Fetch Requests, Obje
 ## Project Management
 
 - [Github Project Board](https://github.com/JoshMallery/Hotel-Colorado/projects/1) stay on task and meet the deadline.
-- [Figma WireFrame] (https://www.figma.com/file/Ei0NDuTysIF08scVIoMXfJ/overlook-Hotel?node-id=0%3A1) an initial overview of how the website will look.
+- [Figma WireFrame](https://www.figma.com/file/Ei0NDuTysIF08scVIoMXfJ/overlook-Hotel?node-id=0%3A1) an initial overview of how the website will look.
 - The project specs and guideline for this project can be found [here](https://frontend.turing.edu/projects/overlook.html)
 
 ## Contributor
