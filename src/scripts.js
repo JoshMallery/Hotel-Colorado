@@ -138,6 +138,10 @@ const determineValidLogin = (custID,pwd) => {
 };
 
 //Event Listeners/////
+window.addEventListener("load", () =>{
+  retrieveDataAfterLogin(15);
+});
+
 logonButton.addEventListener("click", (event) => {
   let input = event.target.parentNode.children;
   determineValidLogin(input[1].value,input[4].value)
