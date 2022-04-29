@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+  <title>Hotel Colorado</title>
+</head>
+<body>
+  <header>HOTEL COLORADO</header>
+  <main>
+    <nav class ="nav-container hidden">
+      <button class="nav-displays" id="yourBookings">Your Bookings</button>
+      <form class="nav-search" onsubmit="return false">
+        <label for ="calendarDate"> Search For Availability by Date:</label>
+        <input class="nav-displays" type="date" id="calendarDate" required>
+        <label for="roomType">Pick a Room Type for Your Stay:</label>
+        <select class="nav-displays" name="roomType" id="roomType">
+          <option value="">Please Pick a Room Type</option>
+          <option value ="single room">Single Room</option>
+          <option value ="junior suite">Junior Suite</option>
+          <option value ="suite">Suite</option>
+          <option value ="residential suite">Residential Suite</option>
+        </select>
+
+        <label for="bedSize">Choose a Bedsize for Your Stay:</label>
+        <select class="nav-displays" name="bedSize" id="bedSize">
+          <option value="">Please Pick a Bed Size</option>
+          <option value ="twin">Twin</option>
+          <option value ="full">Full</option>
+          <option value ="queen">Queen</option>
+          <option value ="king">King</option>
+        </select>
+        <input id="availabilitySearch" type ="submit" value="Search For Available Rooms">
+      </form>
+    </nav>
+    <section class="content-container">
+      <section class="user-prompts-container">
+        <section class="user-text-prompts">
+          Hello and Welcome to Hotel Colorado, Please Login
+        </section>
+        <section class ="login-container">
+          <form class ="login-data" onsubmit="return false">
+            <label for="userID" >UserID:</label>
+            <input id="userID" type="text" required>
+            <br>
+            <label for="password">Password:</label>
+            <input id="password" type="password" required>
+            <input type="submit" id="submitLogon" value="Logon!">
+          </form>
+        </section>
+        <section class ="logout-container">
+          <button class="logout-button hidden" id="logoff">Logout Session</button>
+        </section>
+      </section>
+      <section class="manager-container hidden">
+        <p>Manager ToolBar:</p>
+        <form class="manager-user-view">
+          <label for="userPick">Choose a User to View</label>
+          <input name="userPick" id="mgrSelection" list="managerUserPick" placeholder="Select A User">
+        </form>
+        <section class="daily-info"></section>
+        <datalist id="managerUserPick"></datalist>
+      </section>
+      <section class="rooms-prompts-container">Please Login Above</section>
+      <section class="room-viewing-container">
+        <img src="./images/hotelPool.jpeg" alt="Picturesque view of Hotel Colorado Pool">
+      </section>
+    </section>
+  </main>
+  <script src="bundle.js"></script>
+</body>
+</html>
