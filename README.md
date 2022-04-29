@@ -20,7 +20,12 @@ This is a hotel booking application! It demonstrates use of Fetch Requests, Obje
 - This will run the Webpack in the terminal so you can view and use the application in your browser
 - The browser should then deploy using a local host
 - Find the line that says Project is running at: http://localhost:8080/ Copy and paste that URL into your browser into your browser. Now the application set up and ready to use!
-- Repeat the same steps with the overlook hotel api files
+
+- Next setup the API same steps with the hotel API
+- Go the [Hotel API](https://github.com/turingschool-examples/overlook-api)
+- Clone it down, and `cd` into it.  Then run:
+- `npm install`
+- `npm start`
 
 - NOTE: Make sure that you type `Control + C` in your terminal when you are done using the application. This ensure the server will stop running before your close your Terminal.
 
