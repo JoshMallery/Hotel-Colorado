@@ -1,14 +1,14 @@
 let apiCalls = {
 
 fetchOne(param) {
-    return fetch(`http://localhost:3001/api/v1/${param}`)
+    return fetch(`https://backend-hotel-api2022.herokuapp.com/api/v1/${param}`)
       .then((response) => response.json())
       .then((response) => response[param])
       .catch((error) => console.log(error));
   },
 
 fetchCustomer(param) {
-    return fetch(`http://localhost:3001/api/v1/customers/${param}`)
+    return fetch(`https://backend-hotel-api2022.herokuapp.com/api/v1/customers/${param}`)
       .then((response) => response.json())
       .catch((error) => console.log(error));
   },
@@ -22,7 +22,7 @@ fetchManagerData() {
   },
 
 postBooking(id,date,roomNum) {
-    return fetch('http://localhost:3001/api/v1/bookings', {
+    return fetch('https://backend-hotel-api2022.herokuapp.com/api/v1/bookings', {
       method: "POST",
       body:JSON.stringify({ "userID": id, "date": date, "roomNumber": roomNum }),
       headers: {"Content-Type": "application/json"}
@@ -32,7 +32,7 @@ postBooking(id,date,roomNum) {
   },
 
 removeBooking(bookingInfo) {
-    return fetch(`http://localhost:3001/api/v1/bookings/${bookingInfo}`, {
+    return fetch(`https://backend-hotel-api2022.herokuapp.com/api/v1/bookings/${bookingInfo}`, {
       method: "DELETE",
       headers: {"Content-Type": "application/json"}
     })
