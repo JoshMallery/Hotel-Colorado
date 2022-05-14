@@ -17,6 +17,10 @@ header {
 
 }
 
+img {
+  border-radius:8px;
+}
+
 main {
   display: flex;
   background:#511C29;
