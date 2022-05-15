@@ -6,6 +6,13 @@
 
 This is a hotel booking application! It demonstrates use of Fetch Requests, Object Oriented Programming and UI/UX including accessibility.
 
+## Quick Start
+
+- Go to live link: https://joshmallery.github.io/Hotel-Colorado/
+- **user: customer14**  `userid can be actually be any customer from 1-50 ie. customer1,customer2, ...customer50`
+- **pass: overlook2021**
+
+## Web App Preview
 ![Hotel Colorado](https://user-images.githubusercontent.com/96563007/165417333-66c63140-2558-443e-896f-792eff935514.gif)
 
 ## Local Set-Up Instructions
