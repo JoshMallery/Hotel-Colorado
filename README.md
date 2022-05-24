@@ -13,7 +13,7 @@ This is a hotel booking application! It demonstrates use of Fetch Requests, Obje
 - **pass: overlook2021**
 
 ## Web App Preview
-![Hotel Colorado](https://user-images.githubusercontent.com/96563007/165417333-66c63140-2558-443e-896f-792eff935514.gif)
+![Hotel Colorado](https://user-images.githubusercontent.com/96563007/170073087-9898aa91-9048-4232-9a00-03d0a0ada230.gif)
 
 ## Local Set-Up Instructions
 
