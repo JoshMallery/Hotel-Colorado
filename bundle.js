@@ -312,12 +312,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _dist_images_wallpaper_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
 // Imports
 
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(_dist_images_wallpaper_jpg__WEBPACK_IMPORTED_MODULE_3__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n  background: #F9E784;\n  color: #511C29;\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  margin: 0px;\n  overflow: hidden;\n  width: 100vw;\n}\n\nheader {\n  border: 1px solid;\n  font-size: 60px;\n  height: 10%;\n  width: 100%;\n\n}\n\nimg {\n  border-radius:8px;\n}\n\nmain {\n  display: flex;\n  background:#511C29;\n  height: 90%;\n  width: 100%;\n}\n\np {\n  align-items: flex-start;\n  justify-content: flex-start;\n  text-align:top;\n  font-size: 25px;\n}\n\n.nav-container {\n  align-items: center;\n  color:#F9E784;\n  display:flex;\n  flex-direction: column;\n  height: 60%;\n  justify-content: space-evenly;\n  width: 15%;\n}\n\n.nav-displays {\n  height: 6%;\n  width: 80%;\n}\n\n.nav-search {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 70%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.content-container {\n  background: #F9E784;\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 85%;\n}\n\n.user-prompts-container {\n  border: 1px solid;\n  display: flex;\n  height: 8%;\n  justify-content: space-around;\n  width:100%;\n}\n\n.user-text-prompts {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 50%;\n}\n\n.login-container,.logout-container {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 35%;\n}\n\n.rooms-prompts-container{\n  align-items: center;\n  display:flex;\n  font-size: 25px;\n  height: 5%;\n  justify-content: center;\n  width:100%;\n}\n\n.room-viewing-container {\n  align-items: center;\n  display: flex;\n  flex-wrap:wrap;\n  font-size:30px;\n  height: 77%;\n  justify-content:space-around;\n  overflow-y: scroll;\n  width: 100%;\n}\n\n.room-card {\n  background: blanchedalmond;\n  border-radius: 8px;\n  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  font-size: 17px;\n  height: 50%;\n  margin: 20px;\n  width: 25%;\n}\n\n.room-details {\n  height:80%;\n  padding:10px;\n  width:100%;\n}\n\n.room-image {\n  border-radius: 8px;\n  height: 70%;\n  width: 92%;\n}\n\n.room-card-buttons {\n  display:flex;\n  height:10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.manager-container {\n  align-items: center;\n  display: flex;\n  height: 10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.daily-info {\n  height: 60%;\n  width: 30%;\n}\n\n.manager-user-view {\n  align-items: center;\n  display: flex;\n  height: 60%;\n  width: 30%;\n}\n\n#availabilitySearch {\n  width: 85%;\n}\n\ninput, button, select {\n  border: 1px solid black;\n  border-radius: 5px;\n  transition: transform 0.3s;\n}\n\ninput:hover, button:hover, select:hover {\n  border: 1px solid black;\n  border-radius: 5px;\n  transform: scale(1.05);\n  cursor:pointer;\n}\n\n.hidden {\n  visibility:hidden\n}\n", "",{"version":3,"sources":["webpack://./src/css/styles.css"],"names":[],"mappings":"AAAA;EACE,mBAAmB;EACnB,cAAc;EACd,aAAa;EACb,sBAAsB;EACtB,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,YAAY;AACd;;AAEA;EACE,iBAAiB;EACjB,eAAe;EACf,WAAW;EACX,WAAW;;AAEb;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,kBAAkB;EAClB,WAAW;EACX,WAAW;AACb;;AAEA;EACE,uBAAuB;EACvB,2BAA2B;EAC3B,cAAc;EACd,eAAe;AACjB;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,WAAW;EACX,6BAA6B;EAC7B,UAAU;AACZ;;AAEA;EACE,UAAU;EACV,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,sBAAsB;EACtB,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,iBAAiB;EACjB,aAAa;EACb,UAAU;EACV,6BAA6B;EAC7B,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,YAAY;EACZ,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,YAAY;EACZ,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,eAAe;EACf,UAAU;EACV,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,cAAc;EACd,cAAc;EACd,WAAW;EACX,4BAA4B;EAC5B,kBAAkB;EAClB,WAAW;AACb;;AAEA;EACE,0BAA0B;EAC1B,kBAAkB;EAClB,+CAA+C;EAC/C,aAAa;EACb,sBAAsB;EACtB,eAAe;EACf,WAAW;EACX,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,UAAU;EACV,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,YAAY;EACZ,UAAU;EACV,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,WAAW;EACX,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,sBAAsB;EACtB,cAAc;AAChB;;AAEA;EACE;AACF","sourcesContent":["body {\n  background: #F9E784;\n  color: #511C29;\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  margin: 0px;\n  overflow: hidden;\n  width: 100vw;\n}\n\nheader {\n  border: 1px solid;\n  font-size: 60px;\n  height: 10%;\n  width: 100%;\n\n}\n\nimg {\n  border-radius:8px;\n}\n\nmain {\n  display: flex;\n  background:#511C29;\n  height: 90%;\n  width: 100%;\n}\n\np {\n  align-items: flex-start;\n  justify-content: flex-start;\n  text-align:top;\n  font-size: 25px;\n}\n\n.nav-container {\n  align-items: center;\n  color:#F9E784;\n  display:flex;\n  flex-direction: column;\n  height: 60%;\n  justify-content: space-evenly;\n  width: 15%;\n}\n\n.nav-displays {\n  height: 6%;\n  width: 80%;\n}\n\n.nav-search {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 70%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.content-container {\n  background: #F9E784;\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 85%;\n}\n\n.user-prompts-container {\n  border: 1px solid;\n  display: flex;\n  height: 8%;\n  justify-content: space-around;\n  width:100%;\n}\n\n.user-text-prompts {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 50%;\n}\n\n.login-container,.logout-container {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 35%;\n}\n\n.rooms-prompts-container{\n  align-items: center;\n  display:flex;\n  font-size: 25px;\n  height: 5%;\n  justify-content: center;\n  width:100%;\n}\n\n.room-viewing-container {\n  align-items: center;\n  display: flex;\n  flex-wrap:wrap;\n  font-size:30px;\n  height: 77%;\n  justify-content:space-around;\n  overflow-y: scroll;\n  width: 100%;\n}\n\n.room-card {\n  background: blanchedalmond;\n  border-radius: 8px;\n  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  font-size: 17px;\n  height: 50%;\n  margin: 20px;\n  width: 25%;\n}\n\n.room-details {\n  height:80%;\n  padding:10px;\n  width:100%;\n}\n\n.room-image {\n  border-radius: 8px;\n  height: 70%;\n  width: 92%;\n}\n\n.room-card-buttons {\n  display:flex;\n  height:10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.manager-container {\n  align-items: center;\n  display: flex;\n  height: 10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.daily-info {\n  height: 60%;\n  width: 30%;\n}\n\n.manager-user-view {\n  align-items: center;\n  display: flex;\n  height: 60%;\n  width: 30%;\n}\n\n#availabilitySearch {\n  width: 85%;\n}\n\ninput, button, select {\n  border: 1px solid black;\n  border-radius: 5px;\n  transition: transform 0.3s;\n}\n\ninput:hover, button:hover, select:hover {\n  border: 1px solid black;\n  border-radius: 5px;\n  transform: scale(1.05);\n  cursor:pointer;\n}\n\n.hidden {\n  visibility:hidden\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n  color: #511C29;\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  margin: 0px;\n  overflow: hidden;\n  width: 100vw;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n\nheader {\n  border: 1px solid;\n  font-size: 60px;\n  height: 10%;\n  width: 100%;\n\n}\n\nimg {\n  border-radius:8px;\n}\n\nmain {\n  display: flex;\n  height: 90%;\n  width: 100%;\n}\n\np {\n  align-items: flex-start;\n  justify-content: flex-start;\n  text-align:top;\n  font-size: 25px;\n}\n\n.nav-container {\n  align-items: center;\n  background-color: rgb(248,248,255,0.5);\n  display:flex;\n  flex-direction: column;\n  height: 60%;\n  justify-content: space-evenly;\n  width: 15%;\n}\n\n.nav-displays {\n  height: 6%;\n  width: 80%;\n}\n\n.nav-search {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 70%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.content-container {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 85%;\n}\n\n.user-prompts-container {\n  background-color: rgb(248,248,255,0.5);\n  border: 1px solid;\n  display: flex;\n  height: 8%;\n  justify-content: space-around;\n  width:100%;\n}\n\n.user-text-prompts {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 50%;\n}\n\n.login-container,.logout-container {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 35%;\n}\n\n.rooms-prompts-container{\n  align-items: center;\n  display:flex;\n  font-size: 25px;\n  height: 5%;\n  justify-content: center;\n  width:100%;\n}\n\n.room-viewing-container {\n  align-items: center;\n  display: flex;\n  flex-wrap:wrap;\n  font-size:30px;\n  height: 77%;\n  justify-content:space-around;\n  overflow-y: scroll;\n  width: 100%;\n}\n\n.room-card {\n  background: blanchedalmond;\n  border-radius: 8px;\n  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  font-size: 17px;\n  height: 50%;\n  margin: 20px;\n  width: 25%;\n}\n\n.room-details {\n  height:80%;\n  padding:10px;\n  width:100%;\n}\n\n.room-image {\n  border-radius: 8px;\n  height: 70%;\n  width: 92%;\n}\n\n.room-card-buttons {\n  display:flex;\n  height:10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.manager-container {\n  align-items: center;\n  background-color: rgb(248,248,255,0.5);\n  border: 1px solid;\n  display: flex;\n  height: 10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.daily-info {\n  height: 60%;\n  width: 30%;\n}\n\n.manager-user-view {\n  align-items: center;\n  display: flex;\n  height: 60%;\n  width: 30%;\n}\n\n#availabilitySearch {\n  width: 85%;\n}\n\ninput, button, select {\n  border: 1px solid black;\n  border-radius: 5px;\n  transition: transform 0.3s;\n}\n\ninput:hover, button:hover, select:hover {\n  border: 1px solid black;\n  border-radius: 5px;\n  transform: scale(1.05);\n  cursor:pointer;\n}\n\n.hidden {\n  visibility:hidden\n}\n", "",{"version":3,"sources":["webpack://./src/css/styles.css"],"names":[],"mappings":"AAAA;EACE,cAAc;EACd,aAAa;EACb,sBAAsB;EACtB,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,YAAY;EACZ,yDAAwD;AAC1D;;AAEA;EACE,iBAAiB;EACjB,eAAe;EACf,WAAW;EACX,WAAW;;AAEb;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,WAAW;EACX,WAAW;AACb;;AAEA;EACE,uBAAuB;EACvB,2BAA2B;EAC3B,cAAc;EACd,eAAe;AACjB;;AAEA;EACE,mBAAmB;EACnB,sCAAsC;EACtC,YAAY;EACZ,sBAAsB;EACtB,WAAW;EACX,6BAA6B;EAC7B,UAAU;AACZ;;AAEA;EACE,UAAU;EACV,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,sCAAsC;EACtC,iBAAiB;EACjB,aAAa;EACb,UAAU;EACV,6BAA6B;EAC7B,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,YAAY;EACZ,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,YAAY;EACZ,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,YAAY;EACZ,eAAe;EACf,UAAU;EACV,uBAAuB;EACvB,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,cAAc;EACd,cAAc;EACd,WAAW;EACX,4BAA4B;EAC5B,kBAAkB;EAClB,WAAW;AACb;;AAEA;EACE,0BAA0B;EAC1B,kBAAkB;EAClB,+CAA+C;EAC/C,aAAa;EACb,sBAAsB;EACtB,eAAe;EACf,WAAW;EACX,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,UAAU;EACV,YAAY;EACZ,UAAU;AACZ;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,YAAY;EACZ,UAAU;EACV,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,mBAAmB;EACnB,sCAAsC;EACtC,iBAAiB;EACjB,aAAa;EACb,WAAW;EACX,6BAA6B;EAC7B,WAAW;AACb;;AAEA;EACE,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,mBAAmB;EACnB,aAAa;EACb,WAAW;EACX,UAAU;AACZ;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,sBAAsB;EACtB,cAAc;AAChB;;AAEA;EACE;AACF","sourcesContent":["body {\n  color: #511C29;\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  margin: 0px;\n  overflow: hidden;\n  width: 100vw;\n  background-image: url(\"../../dist/images/wallpaper.jpg\");\n}\n\nheader {\n  border: 1px solid;\n  font-size: 60px;\n  height: 10%;\n  width: 100%;\n\n}\n\nimg {\n  border-radius:8px;\n}\n\nmain {\n  display: flex;\n  height: 90%;\n  width: 100%;\n}\n\np {\n  align-items: flex-start;\n  justify-content: flex-start;\n  text-align:top;\n  font-size: 25px;\n}\n\n.nav-container {\n  align-items: center;\n  background-color: rgb(248,248,255,0.5);\n  display:flex;\n  flex-direction: column;\n  height: 60%;\n  justify-content: space-evenly;\n  width: 15%;\n}\n\n.nav-displays {\n  height: 6%;\n  width: 80%;\n}\n\n.nav-search {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 70%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.content-container {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 85%;\n}\n\n.user-prompts-container {\n  background-color: rgb(248,248,255,0.5);\n  border: 1px solid;\n  display: flex;\n  height: 8%;\n  justify-content: space-around;\n  width:100%;\n}\n\n.user-text-prompts {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 50%;\n}\n\n.login-container,.logout-container {\n  align-items: center;\n  display:flex;\n  height: 100%;\n  justify-content: center;\n  width: 35%;\n}\n\n.rooms-prompts-container{\n  align-items: center;\n  display:flex;\n  font-size: 25px;\n  height: 5%;\n  justify-content: center;\n  width:100%;\n}\n\n.room-viewing-container {\n  align-items: center;\n  display: flex;\n  flex-wrap:wrap;\n  font-size:30px;\n  height: 77%;\n  justify-content:space-around;\n  overflow-y: scroll;\n  width: 100%;\n}\n\n.room-card {\n  background: blanchedalmond;\n  border-radius: 8px;\n  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  font-size: 17px;\n  height: 50%;\n  margin: 20px;\n  width: 25%;\n}\n\n.room-details {\n  height:80%;\n  padding:10px;\n  width:100%;\n}\n\n.room-image {\n  border-radius: 8px;\n  height: 70%;\n  width: 92%;\n}\n\n.room-card-buttons {\n  display:flex;\n  height:10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.manager-container {\n  align-items: center;\n  background-color: rgb(248,248,255,0.5);\n  border: 1px solid;\n  display: flex;\n  height: 10%;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.daily-info {\n  height: 60%;\n  width: 30%;\n}\n\n.manager-user-view {\n  align-items: center;\n  display: flex;\n  height: 60%;\n  width: 30%;\n}\n\n#availabilitySearch {\n  width: 85%;\n}\n\ninput, button, select {\n  border: 1px solid black;\n  border-radius: 5px;\n  transition: transform 0.3s;\n}\n\ninput:hover, button:hover, select:hover {\n  border: 1px solid black;\n  border-radius: 5px;\n  transform: scale(1.05);\n  cursor:pointer;\n}\n\n.hidden {\n  visibility:hidden\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -432,6 +438,55 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 /* 6 */
+/***/ ((module) => {
+
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    // eslint-disable-next-line no-param-reassign
+    options = {};
+  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+
+
+  url = url && url.__esModule ? url.default : url;
+
+  if (typeof url !== "string") {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    // eslint-disable-next-line no-param-reassign
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    // eslint-disable-next-line no-param-reassign
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+
+  return url;
+};
+
+/***/ }),
+/* 7 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("images/wallpaper.jpg");
+
+/***/ }),
+/* 8 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -485,7 +540,7 @@ removeBooking(bookingInfo) {
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -634,7 +689,7 @@ populateBookingCards(displayData,roomPrompt,isManager,currentDate) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -675,7 +730,7 @@ class Customer {
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -702,7 +757,7 @@ class Manager {
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -815,11 +870,11 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _apiCalls_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _domUpdates_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-/* harmony import */ var _classes_Customer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
-/* harmony import */ var _classes_Manager_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _classes_Rooms_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
+/* harmony import */ var _apiCalls_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _domUpdates_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _classes_Customer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
+/* harmony import */ var _classes_Manager_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _classes_Rooms_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
 
 
 
