@@ -9,10 +9,15 @@ This is a hotel booking application! It demonstrates use of Fetch Requests, Obje
 ## Quick Start
 
 - Go to live link: https://joshmallery.github.io/Hotel-Colorado/
-- **user: customer14**  `userid can be actually be any customer from 1-50 ie. customer1,customer2, ...customer50`
-- **pass: overlook2021**
+    - **user: customer14**  `userid can be actually be any customer from 1-50 ie. customer1,customer2, ...customer50`
+    - **pass: overlook2021**
 
-## Web App Preview
+  #### Or
+
+    - **user: manager**  `The Manager class has the ability to view all users and delete bookings`
+    - **pass: overlook2021**
+
+## Web App Preview - User: Manager 
 ![Hotel Colorado](https://user-images.githubusercontent.com/96563007/170073087-9898aa91-9048-4232-9a00-03d0a0ada230.gif)
 
 ## Local Set-Up Instructions
